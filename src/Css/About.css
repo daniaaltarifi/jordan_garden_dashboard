@@ -1,0 +1,83 @@
+.cont_why_choose {
+  background-color: var(--light-green-color);
+}
+.title_why_choose_about {
+  color: var(--brown-color);
+  font-family: Inter;
+  font-weight: 900;
+  line-height: 58.09px;
+}
+.text_why_choose_about {
+  font-family: Inter;
+  font-weight: 900;
+  line-height: 58.09px;
+  color: var(--brown-color);
+  margin-bottom: 8vh;
+}
+.card_service_about {
+  border-radius: 10px;
+  box-shadow: var(--beige-color) 6.95px 1.95px 2.6px;
+  text-align: center;
+  padding: 20px;
+  height: 230px;
+}
+.title_serv_about {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* PROJECT STYLE PAGE */
+.card_project {
+  background-color: var(--light-green-color);
+  padding: 2vh;
+  box-shadow: var(--beige-color) 6.95px 1.95px 2.6px;
+}
+.cont_card_proj {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title_project {
+  font-family: Commissioner;
+  font-weight: 800;
+  line-height: 58.27px;
+}
+.desc_project {
+  font-family: Commissioner;
+  font-weight: 500;
+  line-height: 28.7px;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* BLOGS STYLE PAGE */
+.title_blog{
+/* font-size: 20px; */
+font-weight: 700;
+line-height: 24px;
+
+}
+.desc_blogs{
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blog_card{
+  border: 3px solid var(--light-brown-color);
+  box-shadow: var(--main-color) 6.95px 1.95px 2.6px;
+}
+
+@media screen and (max-width: 768px) {
+  .card_service_about {
+    height: auto;
+  }
+  .title_serv_about {
+    -webkit-line-clamp: none;
+  }
+}

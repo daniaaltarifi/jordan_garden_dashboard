@@ -1,0 +1,106 @@
+.title_team_careers {
+  color: var(--brown-color);
+}
+.desc_team_carerrs {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 38.7px;
+  color: var(--brown-color);
+}
+/* CARDS CAREERS */
+.cont_careers {
+  background-color: #f5c16c78;
+  box-shadow: var(--brown-color) 1.95px 1.95px 2.6px;
+}
+.cont_bag_careers {
+  background-color: var(--main-color);
+  height: 50px;
+  width: 50px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.position_name_careers {
+  color: var(--brown-color);
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
+.btn_position_careers {
+  width: auto;
+  margin-top: 2vh;
+}
+.location_careers {
+  font-weight: 600;
+}
+.link_job_desc_careers {
+  color:var(--brown-color);
+  font-weight: 700;
+  font-size: 17px;
+}
+.link_job_desc_careers:hover {
+  color: var(--main-color);
+  font-weight: 700;
+}
+/* JOP DESCRIPTION STYLE PAGE */
+.title_jobdescr {
+    color:var(--brown-color);
+    font-size: 35px;
+    font-weight: 700;
+    margin-top: 2vh;
+  }
+  .resp_jobdesc{
+    color:var(--brown-color);
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+ 
+
+   /* APPLY FORM POSITION */
+ 
+  .cont_form_apply {
+    height: 100%; 
+    border: 1px solid var(--brown-color);
+  }
+  
+  .cont_backg_apply {
+    background: #f5c16c78;
+    box-shadow: var(--brown-color) 1.95px 1.95px 2.6px;
+    padding: 10vh;
+  }
+  .form_data{
+    padding: 10vh;
+
+  }
+  .input_form{
+    color: var(--light-brown-color);
+    margin-top: 2vh;
+  }
+  .div_btn_applynow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn_apply_now{
+    background-color: var(--light-brown-color);
+    width: 50%;
+    text-align: center;
+    border: none;
+    padding: 10px;
+  }
+  .cv_file{
+    width: 50%;
+  }
+  @media screen and (max-width:768px) {
+    .cv_file{
+      width: auto;
+    }
+    .btn_apply_now{
+      width: auto;
+    }
+  }

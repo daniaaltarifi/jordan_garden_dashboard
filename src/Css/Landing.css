@@ -1,0 +1,111 @@
+.cont_service_home {
+  background-color: var(--light-green-color);
+}
+.card_service_home {
+  color: var(--white-color);
+  position: relative;
+  background-color: transparent !important;
+  margin-bottom: 5vh;
+}
+.titleof_section_home {
+  /* text-align: center; */
+  color: var(--brown-color);
+  font-size: 36px;
+  font-weight: 500;
+  margin: 15vh 0 10vh 0;
+}
+.hr_line_home {
+  width: 10%;
+  border-top: 3px solid var(--brown-color); /* Set a custom top border color and thickness */
+  margin: 20px auto;
+}
+.service_home_img {
+  width: 100%;
+  height: 250px;
+  opacity: 0.7;
+  border-radius: 25px;
+  object-fit: cover;
+  box-shadow: var(--beige-color) 6.95px 1.95px 2.6px;
+  background-color: none;
+}
+.card {
+  --bs-card-border-width: none;
+}
+.card_overlay_home {
+  position: absolute;
+  top: 125px;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.title_card_service_home {
+  font-family: Commissioner;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 39.14px;
+  /* text-align: left; */
+}
+.browse_service_home {
+  font-size: 15px;
+  margin-top: 10px;
+  color: var(--white-color);
+  text-decoration: none;
+}
+.browse_service_home:hover {
+  color: var(--beige-color);
+}
+
+.btn_service_home {
+  width: 120px;
+}
+/* PROJECTS SECTION */
+.list {
+  columns: 300px;
+}
+
+.img_project_home {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0.7rem;
+  box-shadow: var(--beige-color) 6.95px 1.95px 2.6px;
+}
+/* BLOGS SECTION */
+.cont_blog_home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title_blog_home {
+  font-weight: 600;
+  line-height: 32px;
+}
+.blog_desc_home {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blog_img_home {
+  box-shadow: var(--beige-color) 6.95px 1.95px 2.6px;
+}
+.cont_customer_home {
+  border: 3px solid #6a994e;
+  box-shadow: 12px 5px 4px 0px #d87c55;
+  padding: 15px;
+  border-radius: 30px;
+  border: 3px 0px 0px 0px;
+}
+@media screen and (max-width: 768px) {
+  .title_card_service_home{
+    font-size: 18px;
+    line-height: 29px;
+  }
+  .browse_service_home {
+    font-size: 12px;
+  }
+}

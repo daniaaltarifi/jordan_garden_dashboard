@@ -1,0 +1,47 @@
+.cont_footer {
+  background-color: #353532;
+  padding: 5vh;
+}
+.desc_footer {
+  color: var(--white-color);
+  font-family: Rubik;
+  font-weight: 300;
+  margin-top: 2vh;
+}
+.hr_footer {
+  width: 203px;
+  border: 2px solid #6a994e;
+}
+.col_contact_footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 200px;
+}
+.contact_footer {
+  color: var(--white-color);
+}
+
+/* CONTACT SECTION */
+.cont_backg_contact{
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title_contact{
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--brown-color);
+
+}
+.cont_social{
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+.social_contact{
+  color: var(--brown-color);
+font-weight: 600;
+}
