@@ -66,3 +66,14 @@
     margin-left: 0;
   }
 }
+.main_btn_home {
+  background-color: red; 
+  border-color: red; 
+  color: white;
+}
+
+
+.btn {
+  margin-right: 30px;
+}
+

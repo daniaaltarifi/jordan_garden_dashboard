@@ -28,6 +28,11 @@ import UpdateCompany from "./Pages/About/UpdateCompany.jsx";
 import AddBlog from "./Pages/Blogs/AddBlog.jsx";
 import UpdateBlog from "./Pages/Blogs/UpdateBlog.jsx";
 export const API_URL = "http://localhost:3000"
+import AddHeroSection from "./Pages/AddHeroSecontion";
+import UpdateHeroSecontion from "./Pages/UpdateHero";
+import UpdateService from "./Pages/UpdateService";
+import AddService from "./Pages/AddService";
+
 const DirectionHandler = () => {
   const location = useLocation();
   const lang = location.pathname.split("/")[1] || "en";
@@ -66,6 +71,11 @@ function App() {
           <Route exact path="/:lang/contact" element={<Contact />} />
           <Route exact path="/:lang/signup" element={<SignUp />} />
           <Route exact path="/:lang/signin" element={<Login />} />
+          <Route path="/add-hero-section" element={<AddHeroSection />} />
+          <Route    path="/addservice" element={<AddService/>} />
+          <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
+          <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
+
 
           {/* <Route exact path="/contact" element={<Contact />} />
   <Route path="*" element={<PageNotFound />} /> */}

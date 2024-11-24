@@ -53,3 +53,9 @@
   text-align: right;
 }
 
+
+.main_btn_home1 {
+  background-color: red; 
+  border-color: red; 
+  color: white;
+}
