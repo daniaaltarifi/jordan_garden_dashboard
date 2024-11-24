@@ -1,11 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-import { useEffect } from "react";
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 import TopHeader from "./Component/TopHeader";
@@ -32,6 +33,14 @@ import AddHeroSection from "./Pages/AddHeroSecontion";
 import UpdateHeroSecontion from "./Pages/UpdateHero";
 import UpdateService from "./Pages/UpdateService";
 import AddService from "./Pages/AddService";
+
+import UpdateJobDescription from "./Pages/UpdateJobDescription";
+import AddDescriptionJob from "./Pages/AddDescriptionJob";
+import UpdateCareers from "./Pages/UpdateCareers";
+import AddCareers from "./Pages/AddCareers";
+import Cookies from 'js-cookie';
+import { useState,useEffect } from "react";
+
 import UpdateImageProject from "./Pages/Projects/UpdateImageProject.jsx";
 import UpdateLogo from "./Pages/Footer/UpdateLogo.jsx";
 import AddSocial from "./Pages/Footer/AddSocial.jsx";
@@ -45,6 +54,7 @@ import UpdatePrivacyPolicy from "./Pages/PrivacyPolicy/UpdatePrivacyPolicy.jsx";
 import AddTermsAndConditions from "./Pages/TermsAndConditions/AddTermsAndCondition.jsx";
 import UpdateTermsAndCondition from "./Pages/TermsAndConditions/UpdateTermsAndCondition.jsx";
 
+
 const DirectionHandler = () => {
   const location = useLocation();
   const lang = location.pathname.split("/")[1] || "en";
@@ -57,6 +67,16 @@ const DirectionHandler = () => {
   return null;
 };
 function App() {
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('authtoken'));
+  useEffect(() => {
+    const token = Cookies.get('authtoken');
+    if (token) {
+      setIsAuthenticated(!!token);
+    }
+  }, []);
+
+
   return (
     <>
       <Router>
@@ -64,9 +84,8 @@ function App() {
         <Header />
         <DirectionHandler />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-
-          <Route exact path="/:lang" element={<Home />} />
+        <Route path="/dashboard/*" element={
+        isAuthenticated ? <Home /> : <Navigate to="/:lang/signin" replace />}/>
           <Route exact path="/:lang/about" element={<About />} />
           <Route exact path="/:lang/updateabout/:id" element={<UpdateAbout />} />
           <Route exact path="/:lang/updatecompany/:id" element={<UpdateCompany />} />
@@ -80,14 +99,20 @@ function App() {
           <Route exact path="/:lang/addblog" element={<AddBlog />} />
           <Route exact path="/:lang/updateblog/:id" element={<UpdateBlog />} />
           <Route exact path="/:lang/careers" element={<Careers />} />
-          <Route exact path="/:lang/jobdescription/:id" element={<JobDescription />} />
+          <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
           <Route exact path="/:lang/contact" element={<Contact />} />
           <Route exact path="/:lang/signup" element={<SignUp />} />
           <Route exact path="/:lang/signin" element={<Login />} />
           <Route path="/add-hero-section" element={<AddHeroSection />} />
-          <Route    path="/addservice" element={<AddService/>} />
+          <Route    path="/:lang/addservice" element={<AddService/>} />
+          <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
           <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
           <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
+
+          <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
+          <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
+          <Route path="/:lang/addcareer" element={<AddCareers />} />
+
           <Route exact path="/:lang/updatelogo/:id" element={<UpdateLogo />} />
           <Route exact path="/:lang/addsocial" element={<AddSocial />} />
           <Route exact path="/:lang/updatesocial/:id" element={<UpdateSocial />} />
@@ -99,6 +124,7 @@ function App() {
           <Route exact path="/:lang/termsandconditions" element={<TermsAndConditions />} />
           <Route exact path="/:lang/addtermsandcondition" element={<AddTermsAndConditions />} />
           <Route exact path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
+
 
           {/* <Route exact path="/contact" element={<Contact />} />
   <Route path="*" element={<PageNotFound />} /> */}

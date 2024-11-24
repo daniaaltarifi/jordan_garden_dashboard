@@ -1,189 +1,125 @@
-import {
-  Col,
-  Container,
-  Row,
-  FloatingLabel,
-  Form,
-  Button,
-} from "react-bootstrap";
-import { useState } from "react";
-import { FaPhoneAlt } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { Ri24HoursFill } from "react-icons/ri";
-import contact from '../assets/contact.jpg'
+import { useState, useEffect } from "react";
+import { Container, Row, Table, Button } from "react-bootstrap";
+import axios from "axios";
+import { useParams } from "react-router-dom"; 
+import Swal from "sweetalert2"; 
+
 function Contact() {
-  const lang = location.pathname.split("/")[1] || "en";
-  const [validated, setValidated] = useState(false);
+  const { lang } = useParams(); 
+  const [contactData, setContactData] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/ContactUs/getallcontactus/${lang}`);
+        const data = response.data;
+        console.log("Fetched Data:", data);
+       
+        if (Array.isArray(data)) {
+          setContactData(data);
+        } else {
+          setContactData([]); 
+        }
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+        setLoading(false); 
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+        setLoading(false); 
+      }
+    };
 
-    setValidated(true);
+    fetchContactData(); 
+  }, [lang]); 
+
+ 
+
+  
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Are You Sure To Delete Contact Information For this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete it!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+   
+          const response = await axios.delete(`http://localhost:3000/ContactUs/deletecontactus/${id}/${lang}`);
+          if (response.status === 200) {
+            setContactData(contactData.filter(contact => contact.id !== id));
+            Swal.fire("Deleted!", "The contact information has been deleted.", "success");
+            console.log("Contact deleted successfully");
+          } else {
+            Swal.fire("Failed!", "Failed to delete contact.", "error");
+          }
+        } catch (error) {
+          console.error("Error deleting contact:", error);
+          Swal.fire("Error!", "Something went wrong while deleting.", "error");
+        }
+      }
+    });
   };
-  const contactData = [
-    {
-      id: 1,
-      content: "078123456",
-      icon: <FaPhoneAlt />,
-    },
-    {
-      id: 2,
-      content: "contact@example.com",
-      icon: <MdEmail />,
-    },
-    {
-      id: 3,
-      content: "amman",
-      icon: <Ri24HoursFill />,
-    },
-  ];
+
   return (
-    <>
-      <section className="main_margin_section">
-        <Container className="cont_form_apply ">
-          <Row>
-            <Col xl={5} md={12} sm={12} className="cont_backg_apply">
-              <h5 className="text-center mb-5 title_contact">
-                {lang === "ar"
-                  ? "تقدم الآن لهذا الوظيفة"
-                  : "Contact Information"}
-              </h5>
-              <img
-                src={contact}
-                alt="apply"
-                height={"320px"}
-                width={"100%"}
-                className="rounded"
-              />
-              {contactData.map((cont) => (
-                <>
-                  <div className="cont_social">
-                    <h6 className="px-2">{cont.icon}</h6>
-                    <h6 className="social_contact">{cont.content}</h6>
-                  </div>
-                </>
-              ))}
-            </Col>
-            <Col xl={7} md={12} sm={12}>
-              <Form
-                noValidate
-                validated={validated}
-                onSubmit={handleSubmit}
-                className="form_data"
-              >
-                <Row className="mb-3">
-                  <Form.Group
-                    as={Col}
-                    xl="6"
-                    md="12"
-                    sm="12"
-                    controlId="validationCustom01"
-                  >
-                    <Form.Label className="input_form">
-                      {lang === "ar" ? "الاسم الاول" : "First name"}
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="text"
-                      placeholder="First name"
-                      defaultValue="Mark"
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    xl="6"
-                    md="12"
-                    sm="12"
-                    controlId="validationCustom02"
-                  >
-                    <Form.Label className="input_form">
-                      {lang === "ar" ? "الاسم الاخير" : "Last name"}
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="text"
-                      placeholder="Last name"
-                      defaultValue="Otto"
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    xl="6"
-                    md="12"
-                    sm="12"
-                    controlId="validationCustom02"
-                  >
-                    <Form.Label className="input_form">
-                      {lang === "ar" ? "البريد الالكتروني" : "Email"}
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="email"
-                      placeholder="Email address"
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    xl="6"
-                    md="12"
-                    sm="12"
-                    controlId="validationCustom02"
-                  >
-                    <Form.Label className="input_form">
-                      {lang === "ar" ? "رقم الهاتف" : "Phone Number"}
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="number"
-                      placeholder="Phone Number"
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    xl="6"
-                    md="12"
-                    sm="12"
-                    controlId="validationCustom02"
-                  >
-                    <Form.Label className="input_form">
-                      {" "}
-                      {lang === "ar" ? "العنوان" : "Address"}
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="number"
-                      placeholder="Physical Address"
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Label className="input_form">
-                    {lang === "ar" ? "الرسالة" : "Message"}
-                  </Form.Label>
-
-                  <FloatingLabel controlId="floatingTextarea2">
-                    <Form.Control as="textarea" style={{ height: "100px" }} />
-                  </FloatingLabel>
-                </Row>
-                <div className="div_btn_applynow">
-                  <Button type="submit" className="btn_apply_now">
-                    {lang === "ar" ? "ارسال الرسالة" : "Send Message"}
-                  </Button>
-                </div>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </>
+    <section className="main_margin_section">
+      <Container className="cont_form_apply">
+        <Row>
+          <h5 className="text-center mb-5 title_contact">
+            {lang === "ar" ? "تواصل معنا" : "Contact Information"}
+          </h5>
+          {loading ? (
+            <p>Loading...</p> 
+          ) : (
+            <Table striped bordered hover responsive>
+              <thead>
+                <tr>
+                  <th>{lang === "ar" ? "الرقم" : "ID"}</th>
+                  <th>{lang === "ar" ? "الاسم" : "Name"}</th>
+                  <th>{lang === "ar" ? "رقم الهاتف" : "Phone Number"}</th>
+                  <th>{lang === "ar" ? "البريد الالكتروني" : "Email"}</th>
+                  <th>{lang === "ar" ? "العنوان" : "Address"}</th>
+                  <th>{lang === "ar" ? "الرسالة" : "Message"}</th>
+                  <th>{lang === "ar" ? "الإجراءات" : "Actions"}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contactData && contactData.length > 0 ? (
+                  contactData.map((contact) => (
+                    <tr key={contact.id}>
+                      <td>{contact.id}</td>
+                      <td>{contact.first_name} {contact.last_name}</td>
+                      <td>{contact.phone_number}</td>
+                      <td>{contact.email_address}</td>
+                      <td>{contact.physical_address}</td>
+                      <td>{contact.message}</td>
+                      <td>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          className="ml-2"
+                          onClick={() => handleDelete(contact.id)}
+                        >
+                          {lang === "ar" ? "حذف" : "Delete"}
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7">
+                      {lang === "ar" ? "لا توجد بيانات" : "No Data Available"}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          )}
+        </Row>
+      </Container>
+    </section>
   );
 }
 
