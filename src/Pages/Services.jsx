@@ -118,53 +118,49 @@ function Services() {
 
           <Row>
             {servicesData.map((service) => (
-              <Col xl={4} md={6} sm={12} key={service.id}>
-                <Link
-                  to={`/${lang}/servicedetails/${service.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card className="card_services">
-                    <Card.Img
-                      variant="top"
-                      src={`http://localhost:3000/uploads/${service.image}`}
-                      height={"250px"}
-                      alt={service.title}
-                    />
-
-                    <Card.Body className="card_body_services">
-                      <Card.Title className="title_services">
-                        {service.title}
-                      </Card.Title>
-                      <Card.Text className="desc_services">
-                        {service.description}
-                      </Card.Text>
-                      <div className="d-flex justify-content-center">
-                        <Link
-                          to={`/${lang}/servicedetails/${service.id}`}
-                          className="browse_service_home browse_services_page"
-                        >
-                          {lang === "ar" ? "تصفح الخدمة" : "Browse the service"}{" "}
-                          <CiSettings />
-                        </Link>
-                        <Card.Text>
-                          <Link to={`/${lang}/updateservice/${service.id}`}>
-                            <button className="main_btn_home btn_service_home">
-                              {lang === "ar" ? "تعديل الخدمة" : "Update Service"}{" "}
-                            </button>
-                          </Link>
-                        </Card.Text>
-                        {/* Delete Button */}
-                        <button
-                          className="btn btn-danger ml-2"
-                          onClick={() => handleDelete(service.id)}
-                        >
-                          {lang === "ar" ? "حذف الخدمة" : "Delete Service"}
-                        </button>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Link>
-              </Col>
+         <Col xl={4} md={6} sm={12} key={service.id}>
+         <Card className="card_services">
+           <Link
+             to={`/${lang}/servicedetails/${service.id}`}
+             style={{ textDecoration: "none" }}
+           >
+             <Card.Img
+               variant="top"
+               src={`http://localhost:3000/uploads/${service.image}`}
+               height={"250px"}
+               alt={service.title}
+             />
+           </Link>
+       
+           <Card.Body className="card_body_services">
+             <Card.Title className="title_services">{service.title}</Card.Title>
+             <Card.Text className="desc_services">{service.description}</Card.Text>
+             <div className="d-flex justify-content-center">
+             
+               <Link
+                 to={`/${lang}/servicedetails/${service.id}`}
+                 className="browse_service_home browse_services_page"
+               >
+                 {lang === "ar" ? "تصفح الخدمة" : "Browse the service"} <CiSettings />
+               </Link>
+             
+               <Link to={`/${lang}/updateservice/${service.id}`}>
+                 <button className="main_btn_home btn_service_home">
+                   {lang === "ar" ? "تعديل الخدمة" : "Update Service"}{" "}
+                 </button>
+               </Link>
+             
+               <button
+                 className="btn btn-danger ml-2"
+                 onClick={() => handleDelete(service.id)}
+               >
+                 {lang === "ar" ? "حذف الخدمة" : "Delete Service"}
+               </button>
+             </div>
+           </Card.Body>
+         </Card>
+       </Col>
+       
             ))}
           </Row>
         </Container>
