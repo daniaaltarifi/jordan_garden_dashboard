@@ -45,3 +45,10 @@
   color: var(--brown-color);
 font-weight: 600;
 }
+.footer_link{
+  text-decoration: none;
+  color: aliceblue;
+  }
+.footer_link:hover{
+text-decoration: underline;
+}
