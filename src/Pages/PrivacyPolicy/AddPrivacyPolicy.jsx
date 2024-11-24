@@ -5,12 +5,10 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../App';
 
-function AddBlog() {
+function AddPrivacyPolicy() {
   const lang = location.pathname.split("/")[1] || "en";
   const [formData, setFormData] = useState({
-    title: '',
     description: '',
-    image: null,
     lang: 'en', 
   });
 
@@ -24,28 +22,12 @@ function AddBlog() {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      image: file,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const dataToSend = new FormData();
-    dataToSend.append('title', formData.title);
-    dataToSend.append('description', formData.description);
-    dataToSend.append('lang', formData.lang);
-  
-    if (formData.image) {
-      dataToSend.append('image', formData.image);
-    }
-  
     try {
-        const response = await axios.post(`${API_URL}/blogs/createblog`, dataToSend);
+        const response = await axios.post(`${API_URL}/privacypolicy/createprivacypolicy`, formData);
         console.log('Response:', response);
         
         
@@ -54,7 +36,7 @@ function AddBlog() {
           title: 'Added Successfully!',
           text: 'Added Successfully.',
         }).then(() => {
-          navigate(`/${lang}/blogs`);
+          navigate(`/${lang}`);
         });
 
       } catch (error) {
@@ -70,31 +52,16 @@ function AddBlog() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">{lang==='ar' ? "اضافة مدونة":"Add Blog"}</h2>
+      <h2 className="text-center mb-4">{lang==='ar' ? "اضافة سياسة الخصوصية":"Add Privacy Policy"}</h2>
 
       <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Col xl={12} md={6} sm={12}>
-            <Form.Group controlId="formTitle">
-              <Form.Label>{lang ==='ar' ?"العنوان":"Title"}</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
         <Row className="mb-3">
         <Col xl={12} md={6} sm={12}>
             <Form.Group controlId="formdescription">
               <Form.Label>{lang ==='ar' ?"الوصف":"description"}</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={2}
+                rows={5}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
@@ -121,20 +88,6 @@ function AddBlog() {
           </Col>
         </Row>
 
-        <Form.Group controlId="formImage" className="mb-3">
-          <Form.Label>{lang ==='ar' ?"تحميل الصور":"Upload Images"}</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={handleImageChange}
-            required
-          />
-          <div className="mt-2">
-            {formData.image && (
-              <p>{formData.image.name}</p>
-            )}
-          </div>
-        </Form.Group>
-
         <Button variant="success" type="submit" className="w-100">
         {lang ==='ar' ?"اضافة":"Submit"}
         </Button>
@@ -142,4 +95,4 @@ function AddBlog() {
     </div>
   );
 }
-export default AddBlog
+export default AddPrivacyPolicy

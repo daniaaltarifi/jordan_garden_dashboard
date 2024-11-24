@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 // import about2 from "../../assets/about2.png";
 import { FaPhoneAlt } from "react-icons/fa";
 
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
 
 import { MdEdit } from "react-icons/md";
 import "../../Css/About.css";
@@ -14,6 +14,8 @@ function About() {
   const lang = location.pathname.split("/")[1] || "en";
   const [about, setAbout] = useState([]);
   const [company, setCompany] = useState([]);
+  const [logo, setLogo] = useState([]);
+
   const getAbout = async () => {
     try {
       const response = await axios.get(`${API_URL}/about/allaboutes/${lang}`);
@@ -28,14 +30,23 @@ function About() {
         `${API_URL}/choose/allchoosecompanies/${lang}`
       );
       setCompany(response.data);
-      console.log("first", response.data);
     } catch (error) {
       console.log("error: ", error);
     }
   };
+  const getLogo = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/logoes/getalllogos/${lang}`);
+      setLogo(response.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   useEffect(() => {
     getAbout();
     getwhyCompany();
+    getLogo();
   }, [lang]);
 
   return (
@@ -46,7 +57,9 @@ function About() {
             {about.map((about) => (
               <>
                 <Col xl={6} md={6} sm={12} key={about.id}>
-                  <h6 className="title_about_home">ABOUT US</h6>
+                  <h6 className="title_about_home">
+                    {lang === "ar" ? "عن حدائق الاردن" : "ABOUT US"}
+                  </h6>
                   <h2>{about.title}</h2>
                   <p>{about.description}</p>
                   <Link to={`/${lang}/contact`}>
@@ -107,7 +120,16 @@ function About() {
             </Col>
 
             <Col xl={4} md={4} sm={12}>
-              <img src={logo} alt="logo" height={"220px"} width={"150px"} />
+              {logo.map((log) => (
+                <div key={log.id}>
+                  <img
+                    src={`${API_URL}/uploads/${log.image}`}
+                    alt="Logo"
+                    height={"220px"}
+                    width={"150px"}
+                  />
+                </div>
+              ))}
             </Col>
             <Col xl={4} md={4} sm={12}>
               {company.slice(2, 4).map((comp, index) => (

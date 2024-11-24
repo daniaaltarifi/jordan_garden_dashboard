@@ -28,11 +28,32 @@ function AddProject() {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
+    const maxNumOfImg = 3;
+  
+    // If the user selects more than 3 files
+    if (files.length > maxNumOfImg) {
+      Swal.fire({
+        title: "Error",
+        text: "You can only upload a maximum of 3 images",
+        icon: "error",
+      });
+        e.target.value = null;
+      // Set the formData state to empty (or previous images if any)
+      setFormData((prevData) => ({
+        ...prevData,
+        image: [],
+      }));
+  
+      return;
+    }
+  
+    // If it's within the limit, update the state with the selected files
     setFormData((prevData) => ({
       ...prevData,
       image: files,
     }));
   };
+  
   const getServices = async () => {
     try {
       const response = await axios.get(
@@ -48,7 +69,6 @@ function AddProject() {
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const dataToSend = new FormData();
     dataToSend.append("title", formData.title);
     dataToSend.append("description", formData.description);
@@ -101,6 +121,7 @@ function AddProject() {
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -112,6 +133,7 @@ function AddProject() {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -127,6 +149,7 @@ function AddProject() {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -138,6 +161,7 @@ function AddProject() {
                 name="service_id"
                 value={formData.service_id}
                 onChange={handleChange}
+                required
               >
                 {services.map((service) => (
                   <>
@@ -161,6 +185,7 @@ function AddProject() {
                 name="lang"
                 value={formData.lang}
                 onChange={handleChange}
+                required
               >
                 <option value="en"> {lang ==='ar' ?"انجليزي":"English"}</option>
                 <option value="ar">{lang ==='ar' ?"عربي":"Arabic"}</option>
@@ -171,7 +196,7 @@ function AddProject() {
 
         <Form.Group controlId="formImage" className="mb-3">
           <Form.Label>{lang ==='ar' ?"تحميل الصور":"Upload Images"}</Form.Label>
-          <Form.Control type="file" onChange={handleImageChange} multiple />
+          <Form.Control type="file" onChange={handleImageChange} multiple required />
           <div className="mt-2">
             {formData.image && formData.image.length > 0 && (
               <ul>

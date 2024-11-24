@@ -5,12 +5,11 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../App';
 
-function AddBlog() {
+function AddSocial() {
   const lang = location.pathname.split("/")[1] || "en";
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    image: null,
+    content: '',
+    icon: null,
     lang: 'en', 
   });
 
@@ -24,11 +23,11 @@ function AddBlog() {
     }));
   };
 
-  const handleImageChange = (e) => {
+  const handleiconChange = (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
-      image: file,
+      icon: file,
     }));
   };
 
@@ -36,32 +35,31 @@ function AddBlog() {
     e.preventDefault();
   
     const dataToSend = new FormData();
-    dataToSend.append('title', formData.title);
-    dataToSend.append('description', formData.description);
+    dataToSend.append('content', formData.content);
     dataToSend.append('lang', formData.lang);
   
-    if (formData.image) {
-      dataToSend.append('image', formData.image);
+    if (formData.icon) {
+      dataToSend.append('icon', formData.icon);
     }
   
     try {
-        const response = await axios.post(`${API_URL}/blogs/createblog`, dataToSend);
+        const response = await axios.post(`${API_URL}/contacts/createcontact`, dataToSend);
         console.log('Response:', response);
         
         
         Swal.fire({
           icon: 'success',
-          title: 'Added Successfully!',
+          content: 'Added Successfully!',
           text: 'Added Successfully.',
         }).then(() => {
-          navigate(`/${lang}/blogs`);
+          navigate(`/${lang}`);
         });
 
       } catch (error) {
         console.error('Error:', error);        
         Swal.fire({
           icon: 'error',
-          title: 'Connection error!',
+          content: 'Connection error!',
           text: 'We could not connect to the server, please try again later.',
         });
       }
@@ -70,33 +68,18 @@ function AddBlog() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">{lang==='ar' ? "اضافة مدونة":"Add Blog"}</h2>
+      <h2 className="text-center mb-4">{lang==='ar' ? "اضافة تواصل اجتماعي":"Add Social Media"}</h2>
 
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col xl={12} md={6} sm={12}>
-            <Form.Group controlId="formTitle">
-              <Form.Label>{lang ==='ar' ?"العنوان":"Title"}</Form.Label>
+            <Form.Group controlId="formcontent">
+              <Form.Label>{lang ==='ar' ?"المحتوى":"content"}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row className="mb-3">
-        <Col xl={12} md={6} sm={12}>
-            <Form.Group controlId="formdescription">
-              <Form.Label>{lang ==='ar' ?"الوصف":"description"}</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={2}
-                name="description"
-                value={formData.description}
+                placeholder="Enter content"
+                name="content"
+                value={formData.content}
                 onChange={handleChange}
                 required
               />
@@ -121,16 +104,16 @@ function AddBlog() {
           </Col>
         </Row>
 
-        <Form.Group controlId="formImage" className="mb-3">
-          <Form.Label>{lang ==='ar' ?"تحميل الصور":"Upload Images"}</Form.Label>
+        <Form.Group controlId="formicon" className="mb-3">
+          <Form.Label>{lang ==='ar' ?"تحميل الصور":"Upload icons"}</Form.Label>
           <Form.Control
             type="file"
-            onChange={handleImageChange}
+            onChange={handleiconChange}
             required
           />
           <div className="mt-2">
-            {formData.image && (
-              <p>{formData.image.name}</p>
+            {formData.icon && (
+              <p>{formData.icon.name}</p>
             )}
           </div>
         </Form.Group>
@@ -142,4 +125,4 @@ function AddBlog() {
     </div>
   );
 }
-export default AddBlog
+export default AddSocial

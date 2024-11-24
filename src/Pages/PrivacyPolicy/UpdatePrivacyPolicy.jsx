@@ -5,25 +5,22 @@ import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../App";
 
-function UpdateBlog() {
+function UpdatePrivacyPolicy() {
   const { id } = useParams();
   const lang = location.pathname.split("/")[1] || "en";
   const [formData, setFormData] = useState({
-    title: "",
     description: "",
-    image: null,
     lang: "en",
   });
 
   const navigate = useNavigate();
   useEffect(() => {
-    const getBlogById = async () => {
+    const getPrivacyById = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}/blogs/getblogbyid/${id}/${lang}`
+          `${API_URL}/privacypolicy/getprivacypolicybyid/${id}/${lang}`
         );
         setFormData(response.data);
-        console.log("first project", response.data);
       } catch (error) {
         console.error("Error:", error);
         Swal.fire({
@@ -33,7 +30,7 @@ function UpdateBlog() {
         });
       }
     };
-    getBlogById();
+    getPrivacyById();
   }, [lang]);
 
   const handleChange = (e) => {
@@ -44,30 +41,13 @@ function UpdateBlog() {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      image: file,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const dataToSend = new FormData();
-    dataToSend.append("title", formData.title);
-    dataToSend.append("description", formData.description);
-    dataToSend.append("lang", formData.lang);
-
-    if (formData.image) {
-      dataToSend.append("image", formData.image);
-    }
-
     try {
       const response = await axios.put(
-        `${API_URL}/blogs/updateblog/${id}/${lang}`,
-        dataToSend
+        `${API_URL}/privacypolicy/updateprivacypolicy/${id}/${lang}`,
+        formData
       );
       console.log("Response:", response);
 
@@ -76,7 +56,7 @@ function UpdateBlog() {
         title: "Updated Successfully!",
         text: "Updated Successfully.",
       }).then(() => {
-        navigate(`/${lang}/blogs`);
+        navigate(`/${lang}`);
       });
     } catch (error) {
       console.error("Error:", error);
@@ -92,22 +72,9 @@ function UpdateBlog() {
   return (
     <div className="container mt-5">
       <h2 className=" mb-4">
-        {lang === "ar" ? "تعديل  مدونة" : "Update Blog"}
+        {lang === "ar" ? "تعديل  سياسة الخصوصية" : "Update Privacy Policy"}
       </h2>
       <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Col xl={6} md={6} sm={12}>
-            <Form.Group controlId="formTitle">
-              <Form.Label>{lang === "ar" ? "العنوان" : "Title"}</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
 
         <Row className="mb-3">
           <Col xl={6} md={6} sm={12}>
@@ -142,14 +109,6 @@ function UpdateBlog() {
             </Form.Group>
           </Col>
         </Row>
-        <Col xl={6} md={6} sm={12}>
-          <Form.Group controlId="formImage" className="mb-3">
-            <Form.Label>
-              {lang === "ar" ? "تحميل الصور" : "Upload Image"}
-            </Form.Label>
-            <Form.Control type="file" onChange={handleImageChange} />
-          </Form.Group>
-        </Col>
         <Button variant="success" type="submit" className="w-50">
           {lang === "ar" ? "تعديل" : "Submit"}
         </Button>
@@ -157,4 +116,4 @@ function UpdateBlog() {
     </div>
   );
 }
-export default UpdateBlog;
+export default UpdatePrivacyPolicy;
