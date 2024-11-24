@@ -32,6 +32,18 @@ import AddHeroSection from "./Pages/AddHeroSecontion";
 import UpdateHeroSecontion from "./Pages/UpdateHero";
 import UpdateService from "./Pages/UpdateService";
 import AddService from "./Pages/AddService";
+import UpdateImageProject from "./Pages/Projects/UpdateImageProject.jsx";
+import UpdateLogo from "./Pages/Footer/UpdateLogo.jsx";
+import AddSocial from "./Pages/Footer/AddSocial.jsx";
+import UpdateSocial from "./Pages/Footer/UpdateSocial.jsx";
+import AddContent from "./Pages/Footer/AddContent.jsx";
+import UpdateContent from "./Pages/Footer/UpdateContent.jsx";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import TermsAndConditions from "./Pages/TermsAndConditions/TermsAndConditions.jsx";
+import AddPrivacyPolicy from "./Pages/PrivacyPolicy/AddPrivacyPolicy.jsx";
+import UpdatePrivacyPolicy from "./Pages/PrivacyPolicy/UpdatePrivacyPolicy.jsx";
+import AddTermsAndConditions from "./Pages/TermsAndConditions/AddTermsAndCondition.jsx";
+import UpdateTermsAndCondition from "./Pages/TermsAndConditions/UpdateTermsAndCondition.jsx";
 
 const DirectionHandler = () => {
   const location = useLocation();
@@ -63,6 +75,7 @@ function App() {
           <Route exact path="/:lang/projects" element={<Projects />} />
           <Route exact path="/:lang/addproject" element={<AddProject />} />
           <Route exact path="/:lang/updateproject/:id" element={<UpdateProject />} />
+          <Route exact path="/:lang/updateimageproject/:id" element={<UpdateImageProject />} />
           <Route exact path="/:lang/blogs" element={<Blogs />} />
           <Route exact path="/:lang/addblog" element={<AddBlog />} />
           <Route exact path="/:lang/updateblog/:id" element={<UpdateBlog />} />
@@ -75,7 +88,17 @@ function App() {
           <Route    path="/addservice" element={<AddService/>} />
           <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
           <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
-
+          <Route exact path="/:lang/updatelogo/:id" element={<UpdateLogo />} />
+          <Route exact path="/:lang/addsocial" element={<AddSocial />} />
+          <Route exact path="/:lang/updatesocial/:id" element={<UpdateSocial />} />
+          <Route exact path="/:lang/addcontent" element={<AddContent />} />
+          <Route exact path="/:lang/updatecontent/:id" element={<UpdateContent />} />
+          <Route exact path="/:lang/privacypolicy" element={<PrivacyPolicy />} />
+          <Route exact path="/:lang/addprivacypolicy" element={<AddPrivacyPolicy />} />
+          <Route exact path="/:lang/updateprivacypolicy/:id" element={<UpdatePrivacyPolicy />} />
+          <Route exact path="/:lang/termsandconditions" element={<TermsAndConditions />} />
+          <Route exact path="/:lang/addtermsandcondition" element={<AddTermsAndConditions />} />
+          <Route exact path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
 
           {/* <Route exact path="/contact" element={<Contact />} />
   <Route path="*" element={<PageNotFound />} /> */}
