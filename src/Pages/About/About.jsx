@@ -58,7 +58,7 @@ function About() {
                   </h6>
                   <h2>{about.title}</h2>
                   <p>{about.description}</p>
-                  <Link to={`/${lang}/contact`}>
+                  <Link >
                     <button className="main_btn_home">
                       {about.title_btn}
                       <FaPhoneAlt />
