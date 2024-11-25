@@ -49,7 +49,7 @@ const Header = () => {
         </Link></li>
         <div className="d-flex">
 
-        <li><Link to={`${lang}/signin`}><button className="Login-button"> {lang==='ar'? "تسجيل دخول":"Login"}
+        <li><Link to={`/`}><button className="Login-button"> {lang==='ar'? "تسجيل دخول":"Login"}
         </button></Link></li>
         <li><Link to={`${lang}/signup`}><button className="Login-button background_btn"> {lang==='ar'? "تسجيل حساب":" Sign Up"}
         </button></Link></li>

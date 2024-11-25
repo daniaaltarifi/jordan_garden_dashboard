@@ -206,7 +206,7 @@ export default function UpdateHeroSection() {
               <img
                 src={`http://localhost:3000/uploads/${formData.image}`}
                 alt="Hero"
-                style={{ width: "100%", height: "auto", marginTop: "10px" }}
+                style={{ width: "120px", height: "120px", marginTop: "10px" }}
               />
             )}
           </div>

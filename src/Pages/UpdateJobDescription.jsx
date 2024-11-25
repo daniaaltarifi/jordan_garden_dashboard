@@ -26,7 +26,7 @@ function UpdateJobDescription() {
 
     setLoading(true);
     axios
-      .get(`http://localhost:3000/careersdescription/getcareerdescriptionbyid/${careerId}/${lang}`)
+      .get(`http://localhost:3000/careersdescription/getcareerdescriptionbycareer_id/${careerId}/${lang}`)
       .then((response) => {
         if (response.data) {
           setJobDetails(response.data);
@@ -54,7 +54,7 @@ function UpdateJobDescription() {
     e.preventDefault();
   
     axios
-      .put(`http://localhost:3000/careersdescription/careerdescriptionupdate/${careerId}/${lang}`, jobDetails)
+      .put(`http://localhost:3000/careersdescription/careerdescriptionupdatebycareerid/${careerId}/${lang}`, jobDetails)
       .then((response) => {
         if (response.status === 200) {
      
@@ -94,7 +94,7 @@ function UpdateJobDescription() {
       if (result.isConfirmed) {
     
         axios
-          .delete(`http://localhost:3000/careersdescription/deletecareerdescription/${careerId}/${lang}`)
+          .delete(`http://localhost:3000/careersdescription/deletecareerdescriptionbycareerid/${careerId}/${lang}`)
           .then((response) => {
             if (response.status === 200) {
               Swal.fire(
@@ -102,7 +102,7 @@ function UpdateJobDescription() {
                 lang === "ar" ? "تم حذف الوظيفة بنجاح." : "The job has been deleted successfully.",
                 "success"
               );
-              navigate(`/${lang}/jobs`); 
+              navigate(`/${lang}/careers`); 
             }
           })
           .catch((error) => {

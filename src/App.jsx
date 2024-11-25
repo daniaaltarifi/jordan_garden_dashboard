@@ -32,6 +32,9 @@ import UpdateCareers from "./Pages/UpdateCareers";
 import AddCareers from "./Pages/AddCareers";
 import Cookies from 'js-cookie';
 import { useState,useEffect } from "react";
+import UpdateServiceFeature from "./Pages/UpdateServiceFeature";
+
+import AddFeatureServices from "./Pages/AddFeatureServices";
 const DirectionHandler = () => {
   const location = useLocation();
   const lang = location.pathname.split("/")[1] || "en";
@@ -44,14 +47,16 @@ const DirectionHandler = () => {
   return null;
 };
 function App() {
-  
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('authtoken'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('token'));
   useEffect(() => {
-    const token = Cookies.get('authtoken');
+    const token = Cookies.get('token');
+    console.log("isAuthenticated:", isAuthenticated);
     if (token) {
       setIsAuthenticated(!!token);
     }
   }, []);
+
+
 
 
   return (
@@ -61,9 +66,13 @@ function App() {
         <Header />
         <DirectionHandler />
         <Routes>
-        <Route path="/dashboard/*" element={
-        isAuthenticated ? <Home /> : <Navigate to="/:lang/signin" replace />}/>
+        <Route path="/*" element={
+        isAuthenticated ? <Home /> : <Navigate to="/" replace />}/>
+      
           <Route exact path="/:lang/about" element={<About />} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/:lang/signin" element={<Login />} />
+
           <Route exact path="/:lang/services" element={<Services />} />
           <Route exact path="/:lang/servicedetails/:id" element={<ServiceDetails />} />
           <Route exact path="/:lang/projects" element={<Projects />} />
@@ -72,13 +81,15 @@ function App() {
           <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
           <Route exact path="/:lang/contact" element={<Contact />} />
           <Route exact path="/:lang/signup" element={<SignUp />} />
-          <Route exact path="/:lang/signin" element={<Login />} />
+          <Route exact path="/signin" element={<Login />} />
           <Route path="/add-hero-section" element={<AddHeroSection />} />
           <Route    path="/:lang/addservice" element={<AddService/>} />
           <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
+          <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
           <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
           <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
           <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
+          <Route path="/update-feature/:id/:lang" element={<UpdateServiceFeature />} />
           <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
           <Route path="/:lang/addcareer" element={<AddCareers />} />
           {/* <Route exact path="/contact" element={<Contact />} />

@@ -33,7 +33,7 @@ function Services() {
       cancelButtonText: lang === "ar" ? "إلغاء" : "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/services/deleteservice/${serviceId}/${lang}`, {
+        fetch(`http://localhost:3000/services/deleteservice/${lang}/${serviceId}`, {
           method: "DELETE",
         })
           .then((response) => {
@@ -118,10 +118,15 @@ function Services() {
       {/* Services Section */}
       <section className="main_margin_section">
         <Container>
-          <div className="d-flex justify-content-end mb-4">
+          <div className="d-flex justify-content-end mb-4 ">
             <Link to={`/${lang}/addservice`}>
-              <Button variant="primary">
+              <Button variant="primary" className="add-btn"> 
                 {lang === "ar" ? "إضافة خدمة" : "Add Service"}
+              </Button>
+            </Link>
+            <Link to={`/${lang}/AddFeatureServices`}>
+              <Button variant="primary" className="add-btn"> 
+                {lang === "ar" ? "إضافة خدمة" : "Add service descriptione"}
               </Button>
             </Link>
           </div>
@@ -161,7 +166,7 @@ function Services() {
                       </Link>
 
                       <Link to={`/${lang}/updateservice/${service.id}`}>
-                        <button className="main_btn_home btn_service_home">
+                        <button className="btn-update">
                           {lang === "ar"
                             ? "تعديل الخدمة"
                             : "Update Service"}{" "}
@@ -169,7 +174,7 @@ function Services() {
                       </Link>
 
                       <button
-                        className="btn btn-danger ml-2"
+                        className="btn-delete"
                         onClick={() => handleDelete(service.id)}
                       >
                         {lang === "ar" ? "حذف الخدمة" : "Delete Service"}

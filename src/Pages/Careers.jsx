@@ -76,7 +76,6 @@ function Careers() {
       }
     });
   };
-  
 
   if (loading) {
     return (
@@ -97,32 +96,21 @@ function Careers() {
     <>
       <section className="main_margin_section">
         <Container>
-          <div className="d-flex  align-items-center mb-4">
-            <h3 className="title_team_careers">
-              {lang === "ar" ? "فريقنا المذهل" : "Our Amazing Team"}
-            </h3>
-            <Button
-              variant="primary"
-              onClick={() => navigate(`/${lang}/addjobdescription`)}
-            >
-              {lang === "ar" ? "إضافة وصف وظيفة" : "Add Job Description"}
-            </Button>
-            <Button
-              variant="primary"
-              onClick={() => navigate(`/${lang}/addcareer`)}
-            >
-              {lang === "ar" ? "إضافة وصف وظيفة" : "Add Career"}
-            </Button>
-          </div>
-          <h1 className="title_team_careers">
-            {lang === "ar" ? "أعضاء الفريق" : "Team Members"}
-          </h1>
-          <h6 className="desc_team_carerrs">
-            {lang === "ar"
-              ? "يتم تقديم جميع هذه الخدمات بواسطة فريق متكامل ومتخصص من المهندسين الزراعيين والفنيين والعاملين ذوي الخبرة التي تزيد عن 10 سنوات في هذا المجال. استمتع بجمال الطبيعة في حدائقك معنا، واتصل الآن لبدء رحلة تحويل حديقتك إلى واحة خضراء."
-              : "All these services are provided by an integrated and specialized team of agricultural engineers, technicians, and workers with more than 10 years of experience in this field. Enjoy the beauty of nature in your gardens with us, and call now to start the journey of transforming your garden into a green oasis."}
-          </h6>
           <Row>
+            <div>
+              <Button
+                variant="primary"
+                onClick={() => navigate(`/${lang}/addjobdescription`)}
+              >
+                {lang === "ar" ? "إضافة وصف وظيفة" : "Add Job Description"}
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => navigate(`/${lang}/addcareer`)}
+              >
+                {lang === "ar" ? "إضافة وصف وظيفة" : "Add Career"}
+              </Button>
+            </div>
             {careers.length > 0 ? (
               careers.map((career) => (
                 <Col xl={6} md={12} sm={12} key={career.id} className="mt-4">
@@ -195,7 +183,7 @@ function Careers() {
                                 navigate(
                                   `/${lang}/updatejobdescription/${career.id}`
                                 )
-                              } 
+                              }
                             >
                               <FontAwesomeIcon icon={faPencilAlt} />
                             </Button>
