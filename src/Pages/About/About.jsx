@@ -16,28 +16,26 @@ function About() {
   const [company, setCompany] = useState([]);
   const [logo, setLogo] = useState([]);
 
+  // const getAbout = async () => {
+  //   try {
+  //     const response = await axios.get(`${API_URL}/about/allaboutes/${lang}`);
+  //     setAbout(response.data);
+  //   } catch (error) {
+  //     console.log("error: ", error);
+  //   }
+  // };
   const getAbout = async () => {
     try {
-      const response = await axios.get(`${API_URL}/about/allaboutes/${lang}`);
-      setAbout(response.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-  const getwhyCompany = async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}/choose/allchoosecompanies/${lang}`
-      );
-      setCompany(response.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-  const getLogo = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/logoes/getalllogos/${lang}`);
-      setLogo(response.data);
+      const [AboutRes, whyCompanyRes, logoRes] = await Promise.all([
+        axios.get(`${API_URL}/about/allaboutes/${lang}`),
+        axios.get(`${API_URL}/choose/allchoosecompanies/${lang}`),
+        axios.get(`${API_URL}/logoes/getalllogos/${lang}`)
+      ]);
+      setAbout(AboutRes.data);
+      setCompany(whyCompanyRes.data);
+      setLogo(logoRes.data);
+
+
     } catch (error) {
       console.log("error: ", error);
     }
@@ -45,8 +43,6 @@ function About() {
 
   useEffect(() => {
     getAbout();
-    getwhyCompany();
-    getLogo();
   }, [lang]);
 
   return (
@@ -62,7 +58,7 @@ function About() {
                   </h6>
                   <h2>{about.title}</h2>
                   <p>{about.description}</p>
-                  <Link to={`/${lang}/contact`}>
+                  <Link >
                     <button className="main_btn_home">
                       {about.title_btn}
                       <FaPhoneAlt />

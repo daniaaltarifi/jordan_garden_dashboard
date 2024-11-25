@@ -163,9 +163,9 @@ function AddProject() {
                 onChange={handleChange}
                 required
               >
+                    <option value="">{lang ==='ar' ?"اختر الخدمة":"Select service"}</option>
                 {services.map((service) => (
                   <>
-                    <option value="">{lang ==='ar' ?"اختر الخدمة":"Select service"}</option>
                     <option key={service._id} value={service.id}>
                       {service.title}
                     </option>
