@@ -170,7 +170,7 @@ export default function UpdateService() {
               <img
                 src={`http://localhost:3000/uploads/${formData.image}`}
                 alt="Service"
-                style={{ width: "100%", height: "auto", marginTop: "10px" }}
+                style={{ width: "190px", height:"190px", marginTop: "10px" }}
               />
             )}
           </div>

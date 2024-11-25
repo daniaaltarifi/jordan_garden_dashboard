@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import "../Css/Header.css"; // Assuming you have the CSS saved in Nav.css
 import { Link } from "react-router-dom";
-// import logo from "../assets/logo.png";
+
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import axios from "axios";
@@ -92,37 +92,26 @@ const Header = () => {
           </Link>
         </li>
         <div className="d-flex">
-          <li>
-            <Link to={`${lang}/signin`}>
-              <button className="Login-button">
-                {" "}
-                {lang === "ar" ? "تسجيل دخول" : "Login"}
-              </button>
-            </Link>
-          </li>
-          <li>
-            <Link to={`${lang}/signup`}>
-              <button className="Login-button background_btn">
-                {" "}
-                {lang === "ar" ? "تسجيل حساب" : " Sign Up"}
-              </button>
-            </Link>
-          </li>
-          <div
-            className="dropdown-container border-none"
-            onClick={toggleDropdown}
-          >
-            <div className="dropdown-wrapper">
-              <select
-                className="form-select small-select"
-                value={selectedOption}
-                onChange={handleSelection}
-              >
-                <option value="en">en</option>
-                <option value="ar">ar</option>
-              </select>
-            </div>
-          </div>
+
+        <li><Link to={`/`}><button className="Login-button"> {lang==='ar'? "تسجيل دخول":"Login"}
+        </button></Link></li>
+        <li><Link to={`${lang}/signup`}><button className="Login-button background_btn"> {lang==='ar'? "تسجيل حساب":" Sign Up"}
+        </button></Link></li>
+        <div
+       className="dropdown-container border-none"
+       onClick={toggleDropdown}
+       >
+  <div className="dropdown-wrapper">
+    <select
+      className="form-select small-select"
+      value={selectedOption}
+      onChange={handleSelection}
+    >
+      <option value="en">en</option>
+      <option value="ar">ar</option>
+    </select>
+  </div>
+</div>
         </div>
       </ul>
     </nav>

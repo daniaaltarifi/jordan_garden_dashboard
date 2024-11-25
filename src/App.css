@@ -59,3 +59,7 @@
   border-color: red; 
   color: white;
 }
+.cont_features_dervicedetails {
+  border: 2px solid red; 
+  padding: 10px;
+}

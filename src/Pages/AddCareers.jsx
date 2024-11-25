@@ -112,7 +112,7 @@ function AddCareers() {
           </Form.Control>
         </Form.Group>
 
-        <Button variant="primary" type="submit" disabled={loading}>
+        <Button variant="primary" type="submit" disabled={loading} className="mt-3">
           {loading ? (career.language === "ar" ? "جاري الإضافة..." : "Adding...") : career.language === "ar" ? "إضافة" : "Add"}
         </Button>
       </Form>

@@ -11,7 +11,8 @@ function Login() {
   const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const lang = window.location.pathname.split("/")[1] || "en"; 
+  const lang = window.location.pathname.split("/en")[1] || "en"; 
+
   const navigate = useNavigate(); 
 
   const handleSubmit = async (event) => {
@@ -24,15 +25,16 @@ function Login() {
     setValidated(true);
 
     try {
-      const response = await axios.post(`http://localhost:3000/users/login`, {
+      const response = await axios.post(`http://localhost:3000/users/login/${lang}`, {
         email,
         password
       });
 
       if (response.status === 200) {
         Cookies.set("token", response.data.token, { expires: 1 });
-  
-        navigate(`/${lang}/`);
+        console.log(response.data.token);
+        navigate(`/${lang}`); 
+        console.log(`The Langugaue is :${lang}`)
       }
     } catch (error) {
       Swal.fire({
@@ -84,7 +86,7 @@ function Login() {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <button type="submit" className="Login-button w-50 mt-3">
+            <button  className="Login-button w-50 mt-3">
               {lang === "ar" ? "تسجيل دخول" : "Sign In"}
             </button>
             <Link to="/signup" className="link_auth">

@@ -40,21 +40,6 @@ import UpdateCareers from "./Pages/UpdateCareers";
 import AddCareers from "./Pages/AddCareers";
 import Cookies from 'js-cookie';
 import { useState,useEffect } from "react";
-
-import UpdateImageProject from "./Pages/Projects/UpdateImageProject.jsx";
-import UpdateLogo from "./Pages/Footer/UpdateLogo.jsx";
-import AddSocial from "./Pages/Footer/AddSocial.jsx";
-import UpdateSocial from "./Pages/Footer/UpdateSocial.jsx";
-import AddContent from "./Pages/Footer/AddContent.jsx";
-import UpdateContent from "./Pages/Footer/UpdateContent.jsx";
-import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
-import TermsAndConditions from "./Pages/TermsAndConditions/TermsAndConditions.jsx";
-import AddPrivacyPolicy from "./Pages/PrivacyPolicy/AddPrivacyPolicy.jsx";
-import UpdatePrivacyPolicy from "./Pages/PrivacyPolicy/UpdatePrivacyPolicy.jsx";
-import AddTermsAndConditions from "./Pages/TermsAndConditions/AddTermsAndCondition.jsx";
-import UpdateTermsAndCondition from "./Pages/TermsAndConditions/UpdateTermsAndCondition.jsx";
-
-
 const DirectionHandler = () => {
   const location = useLocation();
   const lang = location.pathname.split("/")[1] || "en";
@@ -67,14 +52,16 @@ const DirectionHandler = () => {
   return null;
 };
 function App() {
-  
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('authtoken'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('token'));
   useEffect(() => {
-    const token = Cookies.get('authtoken');
+    const token = Cookies.get('token');
+    console.log("isAuthenticated:", isAuthenticated);
     if (token) {
       setIsAuthenticated(!!token);
     }
   }, []);
+
+
 
 
   return (
@@ -84,11 +71,10 @@ function App() {
         <Header />
         <DirectionHandler />
         <Routes>
-        <Route path="/dashboard/*" element={
-        isAuthenticated ? <Home /> : <Navigate to="/:lang/signin" replace />}/>
+        <Route path="/*" element={
+        isAuthenticated ? <Home /> : <Navigate to="/" replace />}/>
+      
           <Route exact path="/:lang/about" element={<About />} />
-          <Route exact path="/:lang/updateabout/:id" element={<UpdateAbout />} />
-          <Route exact path="/:lang/updatecompany/:id" element={<UpdateCompany />} />
           <Route exact path="/:lang/services" element={<Services />} />
           <Route exact path="/:lang/servicedetails/:id" element={<ServiceDetails />} />
           <Route exact path="/:lang/projects" element={<Projects />} />
@@ -102,14 +88,16 @@ function App() {
           <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
           <Route exact path="/:lang/contact" element={<Contact />} />
           <Route exact path="/:lang/signup" element={<SignUp />} />
-          <Route exact path="/:lang/signin" element={<Login />} />
+          <Route exact path="/signin" element={<Login />} />
           <Route path="/add-hero-section" element={<AddHeroSection />} />
           <Route    path="/:lang/addservice" element={<AddService/>} />
           <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
+          <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
           <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
           <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
 
           <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
+          <Route path="/update-feature/:id/:lang" element={<UpdateServiceFeature />} />
           <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
           <Route path="/:lang/addcareer" element={<AddCareers />} />
 

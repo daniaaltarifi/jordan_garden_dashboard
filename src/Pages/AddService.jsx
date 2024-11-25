@@ -21,7 +21,7 @@ export default function AddService() {
       [name]: value,
     }));
   };
-
+  const lang = location.pathname.split("/")[1] || "en";
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
@@ -56,7 +56,7 @@ export default function AddService() {
         title: "Service Added!",
         text: "The service has been successfully added.",
       }).then(() => {
-        navigate(`/services/${formData.lang}`);
+        navigate(`/${lang}/services`);
       });
 
       setFormData({
