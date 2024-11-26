@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FaPhoneAlt } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { API_URL } from "../../App";
 import { useParams, useNavigate } from "react-router-dom"; 
 function ServiceDetails() {
   const { id } = useParams(); 
@@ -16,7 +17,7 @@ function ServiceDetails() {
   useEffect(() => {
  
     axios
-      .get(`http://localhost:3000/services/getservicebyid/${id}/${lang}`)
+      .get(`${API_URL}/services/getservicebyid/${id}/${lang}`)
       .then((response) => {
         setServiceData(response.data);
         setLoading(false);
@@ -29,7 +30,7 @@ function ServiceDetails() {
     
     axios
       .get(
-        `http://localhost:3000/featureservices/featureservicesbyservice_Id/${id}/${lang}`
+        `${API_URL}/featureservices/featureservicesbyservice_Id/${id}/${lang}`
       )
       .then((response) => {
         setFeatureData(response.data); 
@@ -64,7 +65,7 @@ function ServiceDetails() {
       if (result.isConfirmed) {
     
         axios
-          .delete(`http://localhost:3000/featureservices/deletefeatureservicesbyserviceid/${id}/${lang}`)
+          .delete(`${API_URL}/featureservices/deletefeatureservicesbyserviceid/${id}/${lang}`)
           .then((response) => {
             if (response.status === 200) {
               Swal.fire(
@@ -92,7 +93,7 @@ function ServiceDetails() {
         <Row>
           <Col xl={3} md={6} sm={12} className="cont_img_servicedetaile">
             <img
-              src={`http://localhost:3000/uploads/${serviceData.image}`}
+              src={`${API_URL}/uploads/${serviceData.image}`}
               alt="Service Details"
               className="img_servicedetails rounded-circle"
               style={{ width: "100%", height: "auto" }}
@@ -111,7 +112,7 @@ function ServiceDetails() {
           <Col xl={3} md={6} sm={12} className="cont_features_dervicedetails">
             <div className="mb-3 d-flex justify-content-between">
               <button
-                className="btn btn-primary me-2"
+                className="btn btn-success me-2"
                 onClick={handleUpdateClick} 
               >
                 Update Feature
@@ -137,7 +138,7 @@ function ServiceDetails() {
                     The Image of the service feature:
                   </label>
                   <img
-                    src={`http://localhost:3000/uploads/${featureData.image}`}
+                    src={`${API_URL}/uploads/${featureData.image}`}
                     alt={featureData.title}
                     height={"50px"}
                     width={"50px"}

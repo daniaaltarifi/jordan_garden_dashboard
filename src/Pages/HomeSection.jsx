@@ -4,6 +4,12 @@ import comment from "../assets/comment.png";
 import axios from "axios";
 import { API_URL } from "../App";
 import { useEffect, useState } from "react";
+
+
+
+
+
+
 function HomeSection() {
   const lang = location.pathname.split("/")[1] || "en";
   const [feedbacks, setFeedbacks] = useState([]);

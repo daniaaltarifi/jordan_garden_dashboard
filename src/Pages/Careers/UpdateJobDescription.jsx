@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2"; 
-
+import { API_URL } from "../../App";
 function UpdateJobDescription() {
   const { careerId, lang } = useParams(); 
   const navigate = useNavigate(); 
@@ -26,7 +26,7 @@ function UpdateJobDescription() {
 
     setLoading(true);
     axios
-      .get(`http://localhost:3000/careersdescription/getcareerdescriptionbycareer_id/${careerId}/${lang}`)
+      .get(`${API_URL}/careersdescription/getcareerdescriptionbycareer_id/${careerId}/${lang}`)
       .then((response) => {
         if (response.data) {
           setJobDetails(response.data);
@@ -54,7 +54,7 @@ function UpdateJobDescription() {
     e.preventDefault();
   
     axios
-      .put(`http://localhost:3000/careersdescription/careerdescriptionupdatebycareerid/${careerId}/${lang}`, jobDetails)
+      .put(`${API_URL}/careersdescription/careerdescriptionupdatebycareerid/${careerId}/${lang}`, jobDetails)
       .then((response) => {
         if (response.status === 200) {
      
@@ -94,7 +94,7 @@ function UpdateJobDescription() {
       if (result.isConfirmed) {
     
         axios
-          .delete(`http://localhost:3000/careersdescription/deletecareerdescriptionbycareerid/${careerId}/${lang}`)
+          .delete(`${API_URL}/careersdescription/deletecareerdescriptionbycareerid/${careerId}/${lang}`)
           .then((response) => {
             if (response.status === 200) {
               Swal.fire(
@@ -176,7 +176,7 @@ function UpdateJobDescription() {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="mt-3">
+              <Button variant="primary" type="submit" className="mt-3 btn btn-success">
                 {lang === "ar" ? "تحديث" : "Update"}
               </Button>
               <Button variant="danger" onClick={handleDelete} className="mt-3">

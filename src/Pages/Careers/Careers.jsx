@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import "../Css/Careers.css";
+import "../../Css/Careers.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import work from "../assets/work.png";
+import work from "../../assets/work.png";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { API_URL } from "../../App";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +21,7 @@ function Careers() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/careers/getallcareers/${lang}`)
+    fetch(`${API_URL}/careers/getallcareers/${lang}`)
       .then((response) => response.json())
       .then((data) => {
         setCareers(data);
@@ -49,7 +51,7 @@ function Careers() {
       if (result.isConfirmed) {
         axios
           .delete(
-            `http://localhost:3000/careers/deletecareer/${career_id}/${lang}`
+            `${API_URL}/careers/deletecareer/${career_id}/${lang}`
           )
           .then((response) => {
             if (response.status === 200) {
@@ -99,12 +101,14 @@ function Careers() {
           <Row>
             <div>
               <Button
+              className="btn btn-success"
                 variant="primary"
                 onClick={() => navigate(`/${lang}/addjobdescription`)}
               >
                 {lang === "ar" ? "إضافة وصف وظيفة" : "Add Job Description"}
               </Button>
               <Button
+              className="btn btn-success"
                 variant="primary"
                 onClick={() => navigate(`/${lang}/addcareer`)}
               >
@@ -163,6 +167,7 @@ function Careers() {
                         <br />
                         <div className="d-flex gap-3 mt-3">
                           <Button
+                          className="btn btn-success"
                             variant="primary"
                             onClick={() =>
                               navigate(`/${lang}/updatecareers/${career.id}`)

@@ -1,6 +1,6 @@
-// Header.js
+
 import { useEffect, useState } from "react";
-import "../Css/Header.css"; // Assuming you have the CSS saved in Nav.css
+import "../Css/Header.css"; 
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
@@ -87,6 +87,11 @@ const Header = () => {
           </Link>
         </li>
         <li>
+          <Link to={`${lang}/getallusers`}>
+            {lang === "ar" ? "المستخدمين" : " users"}
+          </Link>
+        </li>
+        <li>
           <Link to={`${lang}/contact`}>
             {lang === "ar" ? "تواصل معنا" : " Contact"}
           </Link>
@@ -95,7 +100,7 @@ const Header = () => {
 
         <li><Link to={`/`}><button className="Login-button"> {lang==='ar'? "تسجيل دخول":"Login"}
         </button></Link></li>
-        <li><Link to={`${lang}/signup`}><button className="Login-button background_btn"> {lang==='ar'? "تسجيل حساب":" Sign Up"}
+        <li><Link to={`${lang}/createadmin`}><button className="admin-button background_btn "> {lang==='ar'? "تسجيل حساب":"Create Admin"}
         </button></Link></li>
         <div
        className="dropdown-container border-none"

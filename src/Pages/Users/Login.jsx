@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import auth from "../assets/slide2.jpg";
-import "../Css/SignUp.css";
+import auth from "../../assets/slide2.jpg";
+import "../../Css/SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie"; 

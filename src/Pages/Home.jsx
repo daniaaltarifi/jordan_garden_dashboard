@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import HomeSection from "./HomeSection";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
   const [heroesData, setHeroesData] = useState([]);
@@ -16,7 +18,6 @@ function Home() {
       .then((data) => setHeroesData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, [lang]);
-
 
   const handleDelete = (heroId) => {
     Swal.fire({
@@ -35,7 +36,11 @@ function Home() {
           })
           .catch((error) => {
             console.error("Error deleting hero:", error);
-            Swal.fire("Error", "There was an error deleting the hero.", "error");
+            Swal.fire(
+              "Error",
+              "There was an error deleting the hero.",
+              "error"
+            );
           });
       }
     });
@@ -63,16 +68,20 @@ function Home() {
                 </div>
                 <Carousel.Caption>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger btn-icon"
                     onClick={() => handleDelete(hero.id)}
                   >
-                    Delete
+                    <FontAwesomeIcon icon={faTrash} /> 
                   </button>
                   <Link to={`/${lang}/update-hero-section/${hero.id}`}>
-                    <button className="btn btn-primary">Update</button>
+                    <button className="btn btn-primary btn-icon">
+                      <FontAwesomeIcon icon={faPen} /> 
+                    </button>
                   </Link>
                   <Link to="/add-hero-section">
-                    <button className="btn btn-success">Add</button>
+                    <button className="btn btn-success btn-icon">
+                      <FontAwesomeIcon icon={faPlus} /> 
+                    </button>
                   </Link>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -82,8 +91,6 @@ function Home() {
           )}
         </Carousel>
       </section>
-
-   
 
       <HomeSection />
     </>

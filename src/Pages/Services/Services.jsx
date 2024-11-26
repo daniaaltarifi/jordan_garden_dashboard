@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Carousel, Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { CiSettings } from "react-icons/ci";
+import { FiEdit, FiTrash2 } from "react-icons/fi";  
+  import { API_URL } from "../../App";
 import Swal from "sweetalert2";
-import "../Css/Services.css";
+import "../../Css/Services.css";  
 
 function Services() {
   const [servicesData, setServicesData] = useState([]);
@@ -12,7 +14,7 @@ function Services() {
   const lang = location.pathname.split("/")[1] || "en";
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services/allservices/${lang}`)
+    fetch(`${API_URL}/services/allservices/${lang}`)
       .then((response) => response.json())
       .then((data) => {
         setServicesData(data);
@@ -33,7 +35,7 @@ function Services() {
       cancelButtonText: lang === "ar" ? "إلغاء" : "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/services/deleteservice/${lang}/${serviceId}`, {
+        fetch(`${API_URL}/services/deleteservice/${serviceId}/${lang}`, {
           method: "DELETE",
         })
           .then((response) => {
@@ -43,8 +45,7 @@ function Services() {
                 lang === "ar" ? "تم حذف الخدمة بنجاح." : "The service has been deleted successfully.",
                 "success"
               );
-             
-              fetch(`http://localhost:3000/services/allservices/${lang}`)
+              fetch(`${API_URL}/services/allservices/${lang}`)
                 .then((response) => response.json())
                 .then((data) => setServicesData(data))
                 .catch(() =>
@@ -88,14 +89,14 @@ function Services() {
 
   return (
     <div className="cont_services">
-      {/* Carousel Section */}
+ 
       <section className="margin_section">
         {servicesData.length > 0 ? (
           <Carousel fade>
             {servicesData.map((service) => (
               <Carousel.Item className="cont_slider" key={service.id}>
                 <img
-                  src={`http://localhost:3000/uploads/${service.image}`}
+                  src={`${API_URL}/uploads/${service.image}`}
                   alt={service.title}
                   className="slider_img"
                   height="400px"
@@ -115,18 +116,17 @@ function Services() {
         )}
       </section>
 
-      {/* Services Section */}
       <section className="main_margin_section">
         <Container>
           <div className="d-flex justify-content-end mb-4 ">
             <Link to={`/${lang}/addservice`}>
-              <Button variant="primary" className="add-btn"> 
+              <Button variant="primary" className="add-btn">
                 {lang === "ar" ? "إضافة خدمة" : "Add Service"}
               </Button>
             </Link>
             <Link to={`/${lang}/AddFeatureServices`}>
-              <Button variant="primary" className="add-btn"> 
-                {lang === "ar" ? "إضافة خدمة" : "Add service descriptione"}
+              <Button variant="primary" className="add-btn">
+                {lang === "ar" ? "إضافة خدمة" : "Add service description"}
               </Button>
             </Link>
           </div>
@@ -141,7 +141,7 @@ function Services() {
                   >
                     <Card.Img
                       variant="top"
-                      src={`http://localhost:3000/uploads/${service.image}`}
+                      src={`${API_URL}/uploads/${service.image}`}
                       height={"250px"}
                       alt={service.title}
                     />
@@ -167,9 +167,7 @@ function Services() {
 
                       <Link to={`/${lang}/updateservice/${service.id}`}>
                         <button className="btn-update">
-                          {lang === "ar"
-                            ? "تعديل الخدمة"
-                            : "Update Service"}{" "}
+                          <FiEdit /> {lang === "ar" ? "تعديل" : "Edit"}
                         </button>
                       </Link>
 
@@ -177,7 +175,7 @@ function Services() {
                         className="btn-delete"
                         onClick={() => handleDelete(service.id)}
                       >
-                        {lang === "ar" ? "حذف الخدمة" : "Delete Service"}
+                        <FiTrash2 /> {lang === "ar" ? "حذف" : "Delete"}
                       </button>
                     </div>
                   </Card.Body>
