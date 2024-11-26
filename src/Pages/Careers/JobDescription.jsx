@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom"; 
-
+import { API_URL } from "../../App";
 import axios from "axios";
 
 function JobDescription() {
@@ -20,7 +20,7 @@ function JobDescription() {
 
     setLoading(true);
     axios
-      .get(`http://localhost:3000/careersdescription/getcareerdescriptionbyid/${careerId}/${lang}`)
+      .get(`${API_URL}/careersdescription/getcareerdescriptionbyid/${careerId}/${lang}`)
       .then((response) => {
         setJobDetails(response.data);
         setLoading(false);
@@ -50,7 +50,7 @@ function JobDescription() {
  
     if (window.confirm("Are you sure you want to delete this job?")) {
       axios
-        .delete(`http://localhost:3000/careersdescription/deletecareer/${careerId}/${lang}`)
+        .delete(`${API_URL}/careersdescription/deletecareer/${careerId}/${lang}`)
         .then((response) => {
           if (response.status === 200) {
             console.log("Job deleted successfully");

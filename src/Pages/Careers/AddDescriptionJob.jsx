@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { API_URL } from "../../App";
 function AddDescriptionJob() {
   const [careers, setCareers] = useState([]);
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ function AddDescriptionJob() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/careers/getallcareers/${formData.lang}`)
+      .get(`${API_URL}/careers/getallcareers/${formData.lang}`)
       .then((response) => {
         setCareers(response.data);
         setLoading(false);
@@ -54,7 +54,7 @@ function AddDescriptionJob() {
     }
 
     axios
-      .post("http://localhost:3000/careersdescription/createcareerdescription", formData)
+      .post("${API_URL}/careersdescription/createcareerdescription", formData)
       .then((response) => {
         if (response.status === 201) {
           Swal.fire(
@@ -181,7 +181,7 @@ function AddDescriptionJob() {
           </Form.Select>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="btn btn-success">
           {formData.lang === "ar" ? "إضافة وصف الوظيفة" : "Add Job Description"}
         </Button>
       </Form>

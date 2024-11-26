@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router-dom";
-import Services from "./Services";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../App";
 
-export default function UpdateService() {
-  const { id, lang } = useParams(); 
+
+export default function AddService() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -16,23 +16,6 @@ export default function UpdateService() {
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/services/getservicebyid/${id}/${lang}`)
-      .then((response) => {
-        setFormData({
-          title: response.data.title,
-          description: response.data.description,
-          image: response.data.image, 
-          lang: response.data.lang,
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching service data:", error);
-        setMessage({ type: "error", text: "Failed to load service data." });
-      });
-  }, [id, lang]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -40,7 +23,7 @@ export default function UpdateService() {
       [name]: value,
     }));
   };
-
+  const lang = location.pathname.split("/")[1] || "en";
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
@@ -62,20 +45,20 @@ export default function UpdateService() {
     }
 
     try {
-      const response = await axios.put(
-        `http://localhost:3000/services/updateservice/${id}/${lang}`,
+      const response = await axios.post(
+        `${API_URL}/services/createservice`,
         dataToSend
       );
       console.log("Response:", response);
 
-      setMessage({ type: "success", text: "Service updated successfully!" });
+      setMessage({ type: "success", text: "Service added successfully!" });
 
       Swal.fire({
         icon: "success",
-        title: "Service Updated!",
-        text: "The service has been successfully updated.",
+        title: "Service Added!",
+        text: "The service has been successfully added.",
       }).then(() => {
-        navigate(`/services/${Services.lang}`); 
+        navigate(`/${lang}/services`);
       });
 
       setFormData({
@@ -98,7 +81,7 @@ export default function UpdateService() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">Update Service</h2>
+      <h2 className="text-center mb-4">Add Service</h2>
 
       {message && (
         <Alert variant={message.type === "success" ? "success" : "danger"}>
@@ -160,23 +143,16 @@ export default function UpdateService() {
               <>
                 <p>{formData.image.name}</p>
                 <img
-                  src={`http://localhost:3000/uploads/${formData.image.name}`}
+                  src={`${API_URL}/uploads/${formData.image.name}`}
                   alt="Service"
-                  style={{ width: "100%", height: "auto", marginTop: "10px" }}
+                  style={{ width: "220px", height: "160px", marginTop: "10px" }}
                 />
               </>
-            )}
-            {formData.image && !formData.image.name && formData.image && (
-              <img
-                src={`http://localhost:3000/uploads/${formData.image}`}
-                alt="Service"
-                style={{ width: "190px", height:"190px", marginTop: "10px" }}
-              />
             )}
           </div>
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
+        <Button variant="primary" type="submit" className="btn btn-success w-100">
           Submit
         </Button>
       </Form>

@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { API_URL } from "../../App";
 export default function UpdateHeroSection() {
   const { id, lang } = useParams(); 
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ export default function UpdateHeroSection() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/heroes/getherobyid/${lang}/${id}`)
+      .get(`${API_URL}/heroes/getherobyid/${lang}/${id}`)
       .then((response) => {
         setFormData({
           title: response.data.title,
@@ -69,7 +69,7 @@ export default function UpdateHeroSection() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/heroes/updatehero/${lang}/${id}`,
+        `${API_URL}/heroes/updatehero/${lang}/${id}`,
         dataToSend
       );
       console.log("Response:", response);
@@ -81,7 +81,7 @@ export default function UpdateHeroSection() {
         title: "Hero Updated!",
         text: "The hero has been successfully updated.",
       }).then(() => {
-        navigate("/");
+        navigate(`/${lang}`); 
       });
 
       setFormData({
@@ -196,7 +196,7 @@ export default function UpdateHeroSection() {
                 <p>{formData.image.name}</p>
               
                 <img
-                  src={`http://localhost:3000/uploads/${formData.image.name}`}
+                  src={`${API_URL}/uploads/${formData.image.name}`}
                   alt="Hero"
                   style={{ width: "100%", height: "auto", marginTop: "10px" }}
                 />
@@ -204,7 +204,7 @@ export default function UpdateHeroSection() {
             )}
             {formData.image && !formData.image.name && formData.image && (
               <img
-                src={`http://localhost:3000/uploads/${formData.image}`}
+                src={`${API_URL}/uploads/${formData.image}`}
                 alt="Hero"
                 style={{ width: "120px", height: "120px", marginTop: "10px" }}
               />
@@ -212,7 +212,7 @@ export default function UpdateHeroSection() {
           </div>
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
+        <Button variant="primary" type="submit" className="w-100 btn btn-success">
           Submit
         </Button>
       </Form>

@@ -15,7 +15,6 @@ function UpdateImageProject() {
   const updateimageproject = async (e) => {
     e.preventDefault();
 
-    // Ensure a file is selected
     if (!img) {
       Swal.fire({
         icon: "error",

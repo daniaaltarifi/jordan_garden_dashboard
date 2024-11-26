@@ -3,7 +3,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+const lang = location.pathname.split("/")[1] || "en";
 function AddFeatureServices() {
   const navigate = useNavigate(); 
   const [services, setServices] = useState([]);
@@ -81,7 +81,7 @@ function AddFeatureServices() {
               : "Feature service added successfully!",
             "success"
           ).then(() => {
-            navigate(`${formData.lang}/services`); 
+            navigate(`/${lang}/services`); 
           });
         }
       })
@@ -185,7 +185,7 @@ function AddFeatureServices() {
         </Form.Group>
 
         {/* Submit Button */}
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="btn btn-success">
           {formData.lang === "ar" ? "إضافة ميزة الخدمة" : "Add Feature Service"}
         </Button>
       </Form>

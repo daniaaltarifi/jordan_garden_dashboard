@@ -13,13 +13,13 @@ function TermsAndConditions() {
   const [showModal, setShowModal] = useState(false);
   const [termsandconditions, settermsandconditions] = useState([]);
   const handleShow = (id) => {
-    setIdToDelete(id); // Set the Blogs ID to delete
+    setIdToDelete(id); 
     setShowModal(true);
   };
 
   const handleClose = () => {
     setShowModal(false);
-    setIdToDelete(null); // Reset the ID when closing
+    setIdToDelete(null); 
   };
   useEffect(() => {
     const termsandconditions = async () => {
@@ -84,7 +84,7 @@ function TermsAndConditions() {
           show={showModal}
           handleClose={handleClose}
           handleDelete={handleDelete}
-          id={IdToDelete} // Pass the Blogs ID to DeleteModule
+          id={IdToDelete} 
         />
       </section>
     </>

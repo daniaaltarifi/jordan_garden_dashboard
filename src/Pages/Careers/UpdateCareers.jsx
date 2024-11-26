@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Button, Form, Container } from "react-bootstrap";
-
+import { API_URL } from "../../App";
 function UpdateCareers() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function UpdateCareers() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/careers/getallcareers/${lang}`)
+      .get(`${API_URL}/careers/getallcareers/${lang}`)
       .then((response) => {
         const careerData = response.data.find((career) => career.id === parseInt(id));
         if (careerData) {
@@ -49,7 +49,7 @@ function UpdateCareers() {
     };
 
     axios
-      .put(`http://localhost:3000/careers/updatecareer/${id}/${lang}`, updatedCareerData)
+      .put(`${API_URL}/careers/updatecareer/${id}/${lang}`, updatedCareerData)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire(
@@ -83,7 +83,7 @@ function UpdateCareers() {
 
   return (
     <Container>
-      <h2>{lang === "ar" ? "تحديث وصف الوظيفة" : "Update Job Description"}</h2>
+      <h2>{lang === "ar" ? "تحديث وصف الوظيفة" : "Update  Career"}</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="position">
           <Form.Label>{lang === "ar" ? "اسم الوظيفة" : "Position Name"}</Form.Label>
@@ -124,7 +124,7 @@ function UpdateCareers() {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="btn btn-success mt-3">
           {lang === "ar" ? "تحديث" : "Update"}
         </Button>
       </Form>

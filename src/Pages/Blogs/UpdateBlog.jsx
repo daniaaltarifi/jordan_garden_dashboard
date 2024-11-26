@@ -16,6 +16,7 @@ function UpdateBlog() {
   });
 
   const navigate = useNavigate();
+  
   useEffect(() => {
     const getBlogById = async () => {
       try {
@@ -142,14 +143,37 @@ function UpdateBlog() {
             </Form.Group>
           </Col>
         </Row>
-        <Col xl={6} md={6} sm={12}>
-          <Form.Group controlId="formImage" className="mb-3">
-            <Form.Label>
-              {lang === "ar" ? "تحميل الصور" : "Upload Image"}
-            </Form.Label>
-            <Form.Control type="file" onChange={handleImageChange} />
-          </Form.Group>
-        </Col>
+        
+  
+        <Row className="mb-3">
+          <Col xl={6} md={6} sm={12}>
+            {formData.image && (
+              <div className="current-image-preview">
+                <Form.Label>
+                  {lang === "ar" ? "الصورة الحالية" : "Current Image"}
+                </Form.Label>
+                <img
+                  src={`${API_URL}/uploads/${formData.image}`}
+                  alt="Current Blog"
+                  className="img-fluid"
+                  style={{ maxHeight: "200px", objectFit: "cover" }}
+                />
+              </div>
+            )}
+          </Col>
+        </Row>
+
+        <Row className="mb-3">
+          <Col xl={6} md={6} sm={12}>
+            <Form.Group controlId="formImage" className="mb-3">
+              <Form.Label>
+                {lang === "ar" ? "تحميل الصور" : "Upload Image"}
+              </Form.Label>
+              <Form.Control type="file" onChange={handleImageChange} />
+            </Form.Group>
+          </Col>
+        </Row>
+
         <Button variant="success" type="submit" className="w-50">
           {lang === "ar" ? "تعديل" : "Submit"}
         </Button>
@@ -157,4 +181,5 @@ function UpdateBlog() {
     </div>
   );
 }
+
 export default UpdateBlog;
