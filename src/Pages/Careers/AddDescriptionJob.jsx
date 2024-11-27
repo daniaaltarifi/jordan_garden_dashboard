@@ -3,7 +3,10 @@ import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { API_URL } from "../../App";
+import { useNavigate } from "react-router-dom";
 function AddDescriptionJob() {
+  const lang = location.pathname.split("/")[1] || "en";
+  const navigate=useNavigate()
   const [careers, setCareers] = useState([]);
   const [formData, setFormData] = useState({
     job_description: "",
@@ -64,14 +67,8 @@ function AddDescriptionJob() {
               : "Job description added successfully!",
             "success"
           );
-          setFormData({
-            job_description: "",
-            responsibilities: "",
-            requirements: "",
-            benefits: "",
-            career_id: "",
-            lang: formData.lang, 
-          });
+         navigate(`/${lang}/careers`)
+          
         }
       })
       .catch((error) => {

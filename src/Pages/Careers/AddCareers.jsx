@@ -56,6 +56,8 @@ function AddCareers() {
   };
 
   return (
+    <section className="main_margin_section">
+
     <Container>
       <h2>{career.language === "ar" ? "إضافة وظيفة جديدة" : "Add New Job"}</h2>
 
@@ -118,6 +120,8 @@ function AddCareers() {
         </Button>
       </Form>
     </Container>
+    </section>
+
   );
 }
 

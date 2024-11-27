@@ -51,7 +51,6 @@ useEffect(()=>{
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("img",formData.image)
   
     const dataToSend = new FormData();
     dataToSend.append('title', formData.title);

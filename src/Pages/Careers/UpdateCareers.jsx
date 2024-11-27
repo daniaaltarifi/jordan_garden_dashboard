@@ -82,6 +82,8 @@ function UpdateCareers() {
   }
 
   return (
+    <section className="main_margin_section">
+
     <Container>
       <h2>{lang === "ar" ? "تحديث وصف الوظيفة" : "Update  Career"}</h2>
       <Form onSubmit={handleSubmit}>
@@ -129,6 +131,8 @@ function UpdateCareers() {
         </Button>
       </Form>
     </Container>
+    </section>
+
   );
 }
 

@@ -101,7 +101,7 @@ const Header = () => {
           </div>
           
           <li>
-            <button className="logout-button" onClick={logout}>
+          <button className="Login-button" onClick={logout}>
               {lang === 'ar' ? "تسجيل خروج" : "Logout"}
             </button>
           </li>

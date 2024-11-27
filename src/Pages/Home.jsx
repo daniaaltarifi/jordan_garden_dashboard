@@ -50,6 +50,11 @@ function Home() {
   return (
     <>
       <section className="margin_section">
+        <Link to={`${lang}/add-hero-section`}>
+                    <button className="btn btn-success btn-icon">
+                      <FontAwesomeIcon icon={faPlus} /> 
+                    </button>
+                  </Link>
         <Carousel fade>
           {heroesData.length > 0 ? (
             heroesData.map((hero) => (
@@ -79,11 +84,7 @@ function Home() {
                       <FontAwesomeIcon icon={faPen} /> 
                     </button>
                   </Link>
-                  <Link to="/add-hero-section">
-                    <button className="btn btn-success btn-icon">
-                      <FontAwesomeIcon icon={faPlus} /> 
-                    </button>
-                  </Link>
+                 
                 </Carousel.Caption>
               </Carousel.Item>
             ))

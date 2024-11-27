@@ -3,7 +3,6 @@ import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
-import Services from "./Services";
 import { API_URL } from "../../App";
 
 export default function UpdateService() {
@@ -76,7 +75,7 @@ export default function UpdateService() {
         title: "Service Updated!",
         text: "The service has been successfully updated.",
       }).then(() => {
-        navigate(`/services/${Services.lang}`); 
+        navigate(`/services/${lang}`); 
       });
 
       setFormData({
