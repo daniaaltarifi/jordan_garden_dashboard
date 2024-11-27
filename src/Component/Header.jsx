@@ -42,24 +42,20 @@ const Header = () => {
     getLogo();
   }, [lang]);
 
-  
+
   const logout = async () => {
     try {
-      // const response = await axios.post(`http://localhost:3000/users/logout`, {}, {
-      //   withCredentials: true,  
-      // });
-  
-      // console.log("Logged out successfully", response.data);
-  
-      Cookies.remove("token");
-  
+      // const userId = 1; 
+      // await axios.post(`${API_URL}/users/logout/${userId}`, {}, { withCredentials: true });
+      // console.log("Logged out successfully");
+    
+    Cookies.remove("token")
       navigate(`/${lang}/login`);
     } catch (error) {
       console.error("Error during logout: ", error);
     }
   };
-  
-  
+
   return (
     <nav>
       {logo.map((log) => (
