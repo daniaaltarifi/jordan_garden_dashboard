@@ -3,6 +3,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { API_URL } from "../../App";
 const lang = location.pathname.split("/")[1] || "en";
 function AddFeatureServices() {
   const navigate = useNavigate(); 
@@ -20,7 +21,7 @@ function AddFeatureServices() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/services/allservices/${formData.lang}`)
+      .get(`${API_URL}/services/allservices/${formData.lang}`)
       .then((response) => {
         setServices(response.data);
         setLoading(false);
@@ -71,7 +72,7 @@ function AddFeatureServices() {
     }
 
     axios
-      .post("http://localhost:3000/featureservices/createservicefeature", formDataToSend)
+      .post(`${API_URL}/featureservices/createservicefeature`, formDataToSend)
       .then((response) => {
         if (response.status === 201) {
           Swal.fire(
