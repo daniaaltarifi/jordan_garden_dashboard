@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-export const API_URL = "http://localhost:3000"
+export const API_URL = "http://localhost:3000";
 import {
   BrowserRouter as Router,
   Routes,
@@ -31,9 +31,8 @@ import AddDescriptionJob from "./Pages/Careers/AddDescriptionJob";
 import UpdateCareers from "./Pages/Careers/UpdateCareers";
 import AddCareers from "./Pages/Careers/AddCareers";
 import Cookies from 'js-cookie';
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import UpdateServiceFeature from "./Pages/Services/UpdateServiceFeature";
-
 import AddFeatureServices from "./Pages/Services/AddFeatureServices";
 import CreateAdmin from "./Pages/Users/CreateAdmin";
 import GetAllUsers from "./Pages/Users/GetAllUsers";
@@ -66,78 +65,82 @@ const DirectionHandler = () => {
 
   return null;
 };
-function App() {
+
+const AppContent = () => {
+  const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('token'));
+
   useEffect(() => {
     const token = Cookies.get('token');
-    console.log("isAuthenticated:", isAuthenticated);
     if (token) {
       setIsAuthenticated(!!token);
     }
   }, []);
 
 
-
+  const hideHeader = ["/", "/:lang/signin", "/:lang/signup"].some((path) =>
+    location.pathname.match(new RegExp(path.replace(":lang", "[a-z]{2}")))
+  );
 
   return (
     <>
-      <Router>
-        <TopHeader />
-        <Header />
-        <DirectionHandler />
-        <Routes>
-        <Route path="/*" element={
-        isAuthenticated ? <Home /> : <Navigate to="/" replace />}/>
-      
-          <Route exact path="/:lang/about" element={<About />} />
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/:lang/signin" element={<Login />} />
-
-          <Route exact path="/:lang/services" element={<Services />} />
-          <Route exact path="/:lang/servicedetails/:id" element={<ServiceDetails />} />
-          <Route exact path="/:lang/projects" element={<Projects />} />
-          <Route exact path="/:lang/blogs" element={<Blogs />} />
-          <Route exact path="/:lang/careers" element={<Careers />} />
-          <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
-          <Route exact path="/:lang/contact" element={<Contact />} />
-          <Route exact path="/:lang/signup" element={<SignUp />} />
-          <Route exact path="/signin" element={<Login />} />
-          <Route path="/add-hero-section" element={<AddHeroSection />} />
-          <Route    path="/:lang/addservice" element={<AddService/>} />
-          <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
-          <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
-          <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
-          <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
-          <Route path="/:lang/updatelogo/:id" element={< UpdateLogo/>} />
-          <Route path="/:lang/updatesocial/:id" element={< UpdateSocial/>} />
-          <Route path="/:lang/updateprivacypolicy/:id" element={< UpdatePrivacyPolicy/>} />
-          <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
-          <Route path="/update-feature/:id/:lang" element={<UpdateServiceFeature />} />
-          <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
-          <Route path="/:lang/updatecontent/:id" element={<UpdateContent />} />
-          <Route path="/:lang/addcareer" element={<AddCareers />} />
-          <Route path="/:lang/createadmin" element={<CreateAdmin />} />
-          <Route path="/:lang/getallusers" element={<GetAllUsers />} />
-          <Route path="/:lang/addsocial" element={<AddSocial />} />
-          <Route path="/:lang/addcontent" element={<AddContent />} />
-          <Route path="/:lang/privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="/:lang/addprivacypolicy" element={<AddPrivacyPolicy />} />
-          <Route path="/:lang/addproject" element={<AddProject />} />
-          <Route path="/:lang/addtermsandcondition" element={<AddTermsAndConditions />} />
-          <Route path="/:lang/addblog" element={<AddBlog />} />
-          <Route path="/:lang/updateproject/:id" element={<UpdateProject />} />
-          <Route path="/:lang/updateblog/:id" element={<UpdateBlog />} />
-          <Route path="/:lang/updateimageproject/:id" element={<UpdateImageProject />} />
-          <Route path="/:lang/termsandconditions" element={<TermsAndConditions />} />
-          <Route path="/:lang/blogs" element={<Blogs />} />
-          <Route path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
-          <Route path="/:lang/updateabout/:id" element={<UpdateAbout />} />
-          {/* <Route exact path="/contact" element={<Contact />} />
-  <Route path="*" element={<PageNotFound />} /> */}
-        </Routes>
-        <Footer />
-      </Router>
+      <TopHeader />
+      {!hideHeader && <Header />}
+      <DirectionHandler />
+      <Routes>
+        <Route path="/*" element={isAuthenticated ? <Home /> : <Navigate to="/" replace />} />
+        <Route exact path="/:lang/about" element={<About />} />
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/:lang/signin" element={<Login />} />
+        <Route exact path="/:lang/services" element={<Services />} />
+        <Route exact path="/:lang/servicedetails/:id" element={<ServiceDetails />} />
+        <Route exact path="/:lang/projects" element={<Projects />} />
+        <Route exact path="/:lang/blogs" element={<Blogs />} />
+        <Route exact path="/:lang/careers" element={<Careers />} />
+        <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
+        <Route exact path="/:lang/contact" element={<Contact />} />
+        <Route exact path="/:lang/signup" element={<SignUp />} />
+        <Route exact path="/signin" element={<Login />} />
+        <Route path="/add-hero-section" element={<AddHeroSection />} />
+        <Route path="/:lang/addservice" element={<AddService />} />
+        <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
+        <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
+        <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
+        <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
+        <Route path="/:lang/updatelogo/:id" element={<UpdateLogo />} />
+        <Route path="/:lang/updatesocial/:id" element={<UpdateSocial />} />
+        <Route path="/:lang/updateprivacypolicy/:id" element={<UpdatePrivacyPolicy />} />
+        <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
+        <Route path="/update-feature/:id/:lang" element={<UpdateServiceFeature />} />
+        <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
+        <Route path="/:lang/updatecontent/:id" element={<UpdateContent />} />
+        <Route path="/:lang/addcareer" element={<AddCareers />} />
+        <Route path="/:lang/createadmin" element={<CreateAdmin />} />
+        <Route path="/:lang/getallusers" element={<GetAllUsers />} />
+        <Route path="/:lang/addsocial" element={<AddSocial />} />
+        <Route path="/:lang/addcontent" element={<AddContent />} />
+        <Route path="/:lang/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/:lang/addprivacypolicy" element={<AddPrivacyPolicy />} />
+        <Route path="/:lang/addproject" element={<AddProject />} />
+        <Route path="/:lang/addtermsandcondition" element={<AddTermsAndConditions />} />
+        <Route path="/:lang/addblog" element={<AddBlog />} />
+        <Route path="/:lang/updateproject/:id" element={<UpdateProject />} />
+        <Route path="/:lang/updateblog/:id" element={<UpdateBlog />} />
+        <Route path="/:lang/updateimageproject/:id" element={<UpdateImageProject />} />
+        <Route path="/:lang/termsandconditions" element={<TermsAndConditions />} />
+        <Route path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
+        <Route path="/:lang/updateabout/:id" element={<UpdateAbout />} />
+      </Routes>
+      <Footer />
     </>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
