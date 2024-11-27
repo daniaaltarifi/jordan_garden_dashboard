@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
-
+// import Header from "../Component/Header";
 function Home() {
   const [heroesData, setHeroesData] = useState([]);
   const lang = location.pathname.split("/")[1] || "en";

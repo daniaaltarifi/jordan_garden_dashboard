@@ -29,7 +29,6 @@ function Login() {
         email,
         password
       });
-
       if (response.status === 200) {
         Cookies.set("token", response.data.token, { expires: 1 });
         console.log(response.data.token);

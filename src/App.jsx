@@ -10,7 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import TopHeader from "./Component/TopHeader";
-import Home from "./Pages/Home";
+// import Home from "./Pages/Home";
 import Footer from "./Component/Footer";
 import About from './Pages/About/About';
 import Projects from "./Pages/Projects/Projects";
@@ -67,7 +67,6 @@ const DirectionHandler = () => {
 };
 
 const AppContent = () => {
-  const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('token'));
 
   useEffect(() => {
@@ -78,18 +77,13 @@ const AppContent = () => {
   }, []);
 
 
-  const hideHeader = ["/", "/:lang/signin", "/:lang/signup"].some((path) =>
-    location.pathname.match(new RegExp(path.replace(":lang", "[a-z]{2}")))
-  );
-
   return (
     <>
       <TopHeader />
-      {!hideHeader && <Header />}
       <DirectionHandler />
       <Routes>
-        <Route path="/*" element={isAuthenticated ? <Home /> : <Navigate to="/" replace />} />
-        <Route exact path="/:lang/about" element={<About />} />
+        <Route path="/*" element={isAuthenticated ? <Header /> : <Navigate to="/" replace />} />
+        <Route exact path="/about" element={<About />} />
         <Route exact path="/" element={<Login />} />
         <Route exact path="/:lang/signin" element={<Login />} />
         <Route exact path="/:lang/services" element={<Services />} />
