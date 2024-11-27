@@ -1,7 +1,9 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-export const API_URL = "http://localhost:3000";
+// export const API_URL = "http://localhost:3000";
+export const API_URL = "https://jordangardensbackend.jordangardens.com";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -53,6 +55,8 @@ import UpdateImageProject from "./Pages/Projects/UpdateImageProject";
 import AddBlog from "./Pages/Blogs/AddBlog";
 import UpdateBlog from "./Pages/Blogs/UpdateBlog";
 import UpdateAbout from "./Pages/About/UpdateAbout";
+import AddAdvantage from "./Pages/Services/AddAdvantage";
+import UpdateAdvantage from "./Pages/Services/UpdateAdvantage";
 
 const DirectionHandler = () => {
   const location = useLocation();
@@ -105,6 +109,8 @@ const AppContent = () => {
         <Route path="/:lang/addservice" element={<AddService />} />
         <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
         <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
+        <Route path="/:lang/addadvantage" element={<AddAdvantage />} />
+        <Route path="/:lang/updateadvantage/:id" element={<UpdateAdvantage />} />
         <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
         <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
         <Route path="/:lang/updatelogo/:id" element={<UpdateLogo />} />

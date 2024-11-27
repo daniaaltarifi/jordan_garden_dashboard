@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Button, Form, Container } from "react-bootstrap";
+import { API_URL } from "../../App";
 
 function AddCareers() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function AddCareers() {
     setLoading(true);
 
     axios
-      .post(`http://localhost:3000/careers/createcareer`, newCareerData)
+      .post(`${API_URL}/careers/createcareer`, newCareerData)
       .then(() => {
         Swal.fire({
           title: career.language === "ar" ? "تم إضافة الوظيفة بنجاح" : "Career Added Successfully",

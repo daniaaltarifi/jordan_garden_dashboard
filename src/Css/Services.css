@@ -50,7 +50,7 @@
   width: 100%;
   object-fit: cover;
 }
-.btn_servicedetails {
+/* .btn_servicedetails {
   background-color: var(--main-color);
   border-radius: 15px;
   border: none;
@@ -61,7 +61,7 @@
 .btn_servicedetails:hover {
   transition: all ease-in-out 350ms;
   box-shadow: var(--light-brown-color) 6.95px 1.95px 2.6px;
-}
+} */
 .title_servicedetails {
   font-size: 30px;
   font-weight: 800;

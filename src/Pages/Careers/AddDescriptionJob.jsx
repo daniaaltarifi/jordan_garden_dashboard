@@ -54,7 +54,7 @@ function AddDescriptionJob() {
     }
 
     axios
-      .post("${API_URL}/careersdescription/createcareerdescription", formData)
+      .post(`${API_URL}/careersdescription/createcareerdescription`, formData)
       .then((response) => {
         if (response.status === 201) {
           Swal.fire(

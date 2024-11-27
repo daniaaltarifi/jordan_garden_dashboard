@@ -126,7 +126,12 @@ function Services() {
             </Link>
             <Link to={`/${lang}/AddFeatureServices`}>
               <Button variant="primary" className="add-btn">
-                {lang === "ar" ? "إضافة خدمة" : "Add service description"}
+                {lang === "ar" ? "إضافة ميزة" : "Add Feature"}
+              </Button>
+            </Link>
+            <Link to={`/${lang}/addadvantage`}>
+              <Button variant="primary" className="add-btn">
+                {lang === "ar" ? "إضافة ايجابية" : "Add Advantage"}
               </Button>
             </Link>
           </div>

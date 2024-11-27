@@ -3,6 +3,7 @@ import { Form, Button, Col, Row, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../App';
 
 export default function AddHeroSection() {
   const [formData, setFormData] = useState({
@@ -48,7 +49,7 @@ export default function AddHeroSection() {
     }
   
     try {
-        const response = await axios.post('http://localhost:3000/heroes/createhero', dataToSend);
+        const response = await axios.post(`${API_URL}/heroes/createhero`, dataToSend);
         console.log('Response:', response);
         
         setMessage({ type: 'success', text: 'The Added Hero is Successfully!' });

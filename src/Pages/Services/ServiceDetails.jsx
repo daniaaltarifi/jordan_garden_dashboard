@@ -1,19 +1,33 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { FaPhoneAlt } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { API_URL } from "../../App";
 import { useParams, useNavigate } from "react-router-dom"; 
+import { MdEdit, MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import DeleteModule from "../../Component/DeleteModule";
 function ServiceDetails() {
   const { id } = useParams(); 
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [featureData, setFeatureData] = useState(null); 
+  const [advData, setAdvData] = useState([]); 
   const lang = location.pathname.split("/")[1] || "en"; 
   const navigate = useNavigate();
-
+  const [IdToDelete, setIdToDelete] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  
+  const handleShow = (id) => {
+    setIdToDelete(id); // Set the Blogs ID to delete
+    setShowModal(true);
+  };
+  
+  const handleClose = () => {
+    setShowModal(false);
+    setIdToDelete(null); // Reset the ID when closing
+  };
   useEffect(() => {
  
     axios
@@ -38,6 +52,18 @@ function ServiceDetails() {
       .catch((error) => {
         console.error("Error fetching feature data:", error);
       });
+      axios
+      .get(`${API_URL}/advantages/getadvantagesnbyservicesid/${id}/${lang}`)
+      .then((response) => {
+        setAdvData(response.data);
+        setLoading(false);
+        
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+
   }, [id, lang]); 
 
   if (loading) {
@@ -53,7 +79,7 @@ function ServiceDetails() {
   };
 
 
-  const handleDelete = () => {
+  const handleDeleteFeatures = () => {
     Swal.fire({
       title: lang === "ar" ? "هل أنت متأكد من الحذف؟" : "Are you sure to delete this Feature Service?",
       text: lang === "ar" ? "لن تتمكن من التراجع عن هذا!" : "You won't be able to revert this!",
@@ -87,6 +113,14 @@ function ServiceDetails() {
       }
     });
   };
+  const handleDelete= async (id) => {
+    try {
+      await axios.delete(`${API_URL}/advantages/deleteadvantages/${id}/${lang}`);
+      setAdvData(advData.filter((b) => b.id !== id));
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
   return (
     <section className="main_margin_section">
       <Container>
@@ -98,10 +132,7 @@ function ServiceDetails() {
               className="img_servicedetails rounded-circle"
               style={{ width: "100%", height: "auto" }}
             />
-            <button className="btn_servicedetails">
-              Request/inquire about the service
-              <FaPhoneAlt className="ms-2" />
-            </button>
+         
           </Col>
 
           <Col xl={6} md={6} sm={12}>
@@ -119,7 +150,7 @@ function ServiceDetails() {
               </button>
               <button
                 className="btn btn-danger"
-                onClick={handleDelete}
+                onClick={handleDeleteFeatures}
               >
                 Delete Feature
               </button>
@@ -151,7 +182,38 @@ function ServiceDetails() {
             </div>
           </Col>
         </Row>
+        <Row className="mt-5">
+      <Col xl={12} md={12} sm={12}>
+        <h2 className="adv_servicedetails">
+          Advantages of natural grass for gardens:
+        </h2>
+        {advData && advData.length > 0 ? (
+          <ul>
+            {advData.map((adv) => (
+              <li key={adv.id} className="listof_adv_servicedetails">
+                {adv.title}  <Link to={`/${lang}/updateadvantage/${adv.id}`}>
+                        <MdEdit className="mx-2" />
+                      </Link>
+                      <MdDelete
+                        className="mx-2"
+                        style={{ color: "red" }}
+                        onClick={() => handleShow(adv.id)}
+                      />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>No Advantage Available</div>
+        )}
+      </Col>
+    </Row>
       </Container>
+      <DeleteModule
+          show={showModal}
+          handleClose={handleClose}
+          handleDelete={handleDelete}
+          id={IdToDelete} // Pass the Blogs ID to DeleteModule
+        />
     </section>
   );
 }

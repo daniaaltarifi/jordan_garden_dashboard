@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import Services from "./Services";
+import { API_URL } from "../../App";
 
 export default function UpdateService() {
   const { id, lang } = useParams(); 
@@ -18,7 +19,7 @@ export default function UpdateService() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/services/getservicebyid/${id}/${lang}`)
+      .get(`${API_URL}/services/getservicebyid/${id}/${lang}`)
       .then((response) => {
         setFormData({
           title: response.data.title,
@@ -63,7 +64,7 @@ export default function UpdateService() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/services/updateservice/${id}/${lang}`,
+        `${API_URL}/services/updateservice/${id}/${lang}`,
         dataToSend
       );
       console.log("Response:", response);
@@ -160,7 +161,7 @@ export default function UpdateService() {
               <>
                 <p>{formData.image.name}</p>
                 <img
-                  src={`http://localhost:3000/uploads/${formData.image.name}`}
+                  src={`${API_URL}/uploads/${formData.image.name}`}
                   alt="Service"
                   style={{ width: "100%", height: "auto", marginTop: "10px" }}
                 />
@@ -168,7 +169,7 @@ export default function UpdateService() {
             )}
             {formData.image && !formData.image.name && formData.image && (
               <img
-                src={`http://localhost:3000/uploads/${formData.image}`}
+                src={`${API_URL}/uploads/${formData.image}`}
                 alt="Service"
                 style={{ width: "190px", height:"190px", marginTop: "10px" }}
               />

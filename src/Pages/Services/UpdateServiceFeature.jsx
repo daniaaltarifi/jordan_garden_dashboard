@@ -49,7 +49,7 @@ function UpdateServiceFeature() {
               confirmButtonText: lang === "ar" ? "موافق" : "OK",
             }).then(() => {
            
-              navigate(`/${lang}/careers`);
+              navigate(`/${lang}/services`);
             });
           }
      
