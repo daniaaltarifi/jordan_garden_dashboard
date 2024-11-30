@@ -10,16 +10,20 @@ function GetAllCvs() {
   const [cvsData, setCvsData] = useState([]); 
   const [loading, setLoading] = useState(true); 
 
- 
   useEffect(() => {
     const fetchCvsData = async () => {
       try {
+        if (!API_URL) {
+          console.error("API_URL is not defined");
+          setLoading(false);
+          return;
+        }
 
-        const response = await axios.get(`${API_URL}/CreateCareer/allcareer`);
+        const response = await axios.get(`${API_URL}/CreateCareer/allcareer/${lang}`);
         const data = response.data;
+
         if (Array.isArray(data)) {
           setCvsData(data);
-          console.log("first data: " ,data);
         } else {
           console.warn("Unexpected data format:", data);
           setCvsData([]);
@@ -35,6 +39,21 @@ function GetAllCvs() {
   }, []);
 
 
+  const handleDownloadCv = (cvPath) => {
+    if (!cvPath) {
+      Swal.fire(
+        lang === "ar" ? "لا يوجد ملف!" : "No file!",
+        lang === "ar" ? "لم يتم توفير السيرة الذاتية." : "No CV file available.",
+        "info"
+      );
+      return;
+    }
+
+  
+    const formattedPath = `${API_URL}/${cvPath.replace(/\\/g, "/")}`;
+    window.open(formattedPath, "_blank");
+  };
+
   const handleDelete = (id) => {
     Swal.fire({
       title: lang === "ar" ? "هل أنت متأكد؟" : "Are you sure?",
@@ -49,8 +68,7 @@ function GetAllCvs() {
           const response = await axios.delete(`${API_URL}/CreateCareer/deletecareerbycareerid/${id}`);
           if (response.status === 200) {
             setCvsData(cvsData.filter((cv) => cv.id !== id));
-            Swal.fire(lang === "ar" ? "تم الحذف!" : "Deleted!", lang === "ar" ? "تم حذف السيرة الذاتية." : "The CV has been deleted.", "success")
-            
+            Swal.fire(lang === "ar" ? "تم الحذف!" : "Deleted!", lang === "ar" ? "تم حذف السيرة الذاتية." : "The CV has been deleted.", "success");
           } else {
             Swal.fire(lang === "ar" ? "فشل!" : "Failed!", lang === "ar" ? "فشل حذف السيرة الذاتية." : "Failed to delete the CV.", "error");
           }
@@ -75,12 +93,13 @@ function GetAllCvs() {
             <Table striped bordered hover responsive>
               <thead>
                 <tr>
+                  <th>{lang === "ar" ? "الرقم" : "ID"}</th>
                   <th>{lang === "ar" ? "الاسم" : "Name"}</th>
                   <th>{lang === "ar" ? "البريد الإلكتروني" : "Email"}</th>
-                  <th>{lang === "ar" ? "المسمى الوظيفي" : "Job Title"}</th>
-                  <th>{lang === "ar" ? "رقم الهاتف" : "phoneNumber"}</th>
-                  <th>{lang === "ar" ? "سنوات الخبرة" : "years Of Experience"}</th>
-                  <th>{lang === "ar" ? "المهارات" : "skills"}</th>
+                  <th>{lang === "ar" ? "رقم الهاتف" : "Phone Number"}</th>
+                  <th>{lang === "ar" ? "عدد سنوات الخبرة" : "Years of Experience"}</th>
+                  <th>{lang === "ar" ? "المسمى الوظيفي" : "Position"}</th>
+                  <th>{lang === "ar" ? "تحميل السيرة الذاتية" : "Download CV"}</th>
                   <th>{lang === "ar" ? "الإجراءات" : "Actions"}</th>
                 </tr>
               </thead>
@@ -88,12 +107,21 @@ function GetAllCvs() {
                 {cvsData.length > 0 ? (
                   cvsData.map((cv) => (
                     <tr key={cv.id}>
-                      <td>{cv.firstName || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
+                      <td>{cv.id}</td>
+                      <td>{cv.firstName} {cv.lastName || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
                       <td>{cv.email || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
-                      <td>{cv.job_title || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
                       <td>{cv.phoneNumber || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
                       <td>{cv.yearsOfExperience || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
-                      <td>{cv.skills || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
+                      <td>{cv.Career?.position || (lang === "ar" ? "غير متوفر" : "N/A")}</td>
+                      <td>
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          onClick={() => handleDownloadCv(cv.uploadCv)}
+                        >
+                          {lang === "ar" ? "تحميل" : "Download"}
+                        </Button>
+                      </td>
                       <td>
                         <Button
                           variant="danger"
@@ -107,7 +135,7 @@ function GetAllCvs() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="text-center">
+                    <td colSpan="8" className="text-center">
                       {lang === "ar" ? "لا توجد بيانات" : "No Data Available"}
                     </td>
                   </tr>

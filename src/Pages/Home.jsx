@@ -50,7 +50,11 @@ function Home() {
   return (
     <>
       <section className="margin_section">
+
+      <Link to="/add-hero-section">
+
         <Link to={`${lang}/add-hero-section`}>
+
                     <button className="btn btn-success btn-icon">
                       <FontAwesomeIcon icon={faPlus} /> 
                     </button>
@@ -84,7 +88,11 @@ function Home() {
                       <FontAwesomeIcon icon={faPen} /> 
                     </button>
                   </Link>
+
+                
+
                  
+
                 </Carousel.Caption>
               </Carousel.Item>
             ))
