@@ -10,7 +10,6 @@ function AddFeatureServices() {
   const [services, setServices] = useState([]);
   const [formData, setFormData] = useState({
     feature_name: "",
-    description: "",
     service_id: "",
     lang: "en",
     image: null,
@@ -63,7 +62,6 @@ function AddFeatureServices() {
 
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.feature_name);
-    formDataToSend.append("description", formData.description);
     formDataToSend.append("service_id", formData.service_id);
     formDataToSend.append("lang", formData.lang);
 
@@ -141,20 +139,6 @@ function AddFeatureServices() {
             value={formData.feature_name}
             onChange={handleChange}
             placeholder={formData.lang === "ar" ? "أدخل اسم الميزة" : "Enter feature name"}
-            required
-          />
-        </Form.Group>
-
-        {/* Description */}
-        <Form.Group className="mb-3">
-          <Form.Label>{formData.lang === "ar" ? "الوصف" : "Description"}</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder={formData.lang === "ar" ? "أدخل الوصف" : "Enter description"}
             required
           />
         </Form.Group>

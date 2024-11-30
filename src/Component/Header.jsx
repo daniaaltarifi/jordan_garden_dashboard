@@ -82,6 +82,7 @@ const Header = () => {
         <li><Link to={`${lang}/careers`}>{lang === "ar" ? "الوظائف" : "Careers"}</Link></li>
         <li><Link to={`${lang}/getallusers`}>{lang === "ar" ? "المستخدمين" : "Users"}</Link></li>
         <li><Link to={`${lang}/contact`}>{lang === "ar" ? "تواصل معنا" : "Contact"}</Link></li>
+        <li><Link to={`${lang}/allcvs`}>{lang === "ar" ? "تواصل معنا" : "allcvs"}</Link></li>
 
         <div className="d-flex">
           <li><Link to={`/`}><button className="Login-button">{lang === 'ar' ? "تسجيل دخول" : "Login"}</button></Link></li>

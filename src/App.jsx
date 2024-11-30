@@ -53,6 +53,7 @@ import UpdateImageProject from "./Pages/Projects/UpdateImageProject";
 import AddBlog from "./Pages/Blogs/AddBlog";
 import UpdateBlog from "./Pages/Blogs/UpdateBlog";
 import UpdateAbout from "./Pages/About/UpdateAbout";
+import GetAllCvs from "./Pages/Careers/GetAllCvs";
 
 const DirectionHandler = () => {
   const location = useLocation();
@@ -118,6 +119,7 @@ const AppContent = () => {
         <Route path="/:lang/addcareer" element={<AddCareers />} />
         <Route path="/:lang/createadmin" element={<CreateAdmin />} />
         <Route path="/:lang/getallusers" element={<GetAllUsers />} />
+        <Route path="/:lang/allcvs" element={<GetAllCvs />} />
         <Route path="/:lang/addsocial" element={<AddSocial />} />
         <Route path="/:lang/addcontent" element={<AddContent />} />
         <Route path="/:lang/privacypolicy" element={<PrivacyPolicy />} />
