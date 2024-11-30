@@ -27,8 +27,7 @@ function AddPrivacyPolicy() {
     e.preventDefault();
   
     try {
-        const response = await axios.post(`${API_URL}/privacypolicy/createprivacypolicy`, formData);
-        console.log('Response:', response);
+       await axios.post(`${API_URL}/privacypolicy/createprivacypolicy`, formData);
         
         
         Swal.fire({

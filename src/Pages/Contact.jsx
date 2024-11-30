@@ -15,7 +15,6 @@ function Contact() {
       try {
         const response = await axios.get(`${API_URL}/ContactUs/getallcontactus/${lang}`);
         const data = response.data;
-        console.log("Fetched Data:", data);
        
         if (Array.isArray(data)) {
           setContactData(data);
@@ -52,7 +51,6 @@ function Contact() {
           if (response.status === 200) {
             setContactData(contactData.filter(contact => contact.id !== id));
             Swal.fire("Deleted!", "The contact information has been deleted.", "success");
-            console.log("Contact deleted successfully");
           } else {
             Swal.fire("Failed!", "Failed to delete contact.", "error");
           }

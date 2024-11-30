@@ -24,7 +24,6 @@ function Careers() {
       .then((response) => response.json())
       .then((data) => {
         setCareers(data);
-        console.log("first career found0", data);
         setLoading(false);
       })
       .catch((error) => {

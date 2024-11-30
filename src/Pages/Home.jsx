@@ -51,7 +51,6 @@ function Home() {
     <>
       <section className="margin_section">
 
-      <Link to="/add-hero-section">
 
         <Link to={`${lang}/add-hero-section`}>
 

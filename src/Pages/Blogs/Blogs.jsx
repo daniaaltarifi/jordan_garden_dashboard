@@ -26,7 +26,6 @@ function Blogs() {
     try {
       const response = await axios.get(`${API_URL}/blogs/getallblogs/${lang}`);
       setblogsData(response.data);
-      console.log("first blog", response.data);
     } catch (error) {
       console.log("error: ", error);
     }

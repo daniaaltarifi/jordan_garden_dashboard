@@ -45,11 +45,10 @@ function UpdatePrivacyPolicy() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+       await axios.put(
         `${API_URL}/privacypolicy/updateprivacypolicy/${id}/${lang}`,
         formData
       );
-      console.log("Response:", response);
 
       Swal.fire({
         icon: "success",

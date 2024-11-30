@@ -16,14 +16,7 @@ function About() {
   const [company, setCompany] = useState([]);
   const [logo, setLogo] = useState([]);
 
-  // const getAbout = async () => {
-  //   try {
-  //     const response = await axios.get(`${API_URL}/about/allaboutes/${lang}`);
-  //     setAbout(response.data);
-  //   } catch (error) {
-  //     console.log("error: ", error);
-  //   }
-  // };
+
   const getAbout = async () => {
     try {
       const [AboutRes, whyCompanyRes, logoRes] = await Promise.all([

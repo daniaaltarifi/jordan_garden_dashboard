@@ -20,7 +20,6 @@ useEffect(()=>{
     try {
       const response = await axios.get(`${API_URL}/choose/getchoosecompanybyid/${lang}/${id}`);
       setFormData(response.data);
-      console.log("first project" ,response.data)
     } catch (error) {
       console.error('Error:', error);
       Swal.fire({
@@ -42,7 +41,6 @@ useEffect(()=>{
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log(file.name)
     setFormData((prevData) => ({
       ...prevData,
       image: file,
@@ -61,8 +59,7 @@ useEffect(()=>{
     }
   
     try {
-        const response = await axios.put(`${API_URL}/choose/updatechoosecompany/${lang}/${id}`, dataToSend);
-        console.log('Response:', response);
+         await axios.put(`${API_URL}/choose/updatechoosecompany/${lang}/${id}`, dataToSend);
         
         
         Swal.fire({

@@ -45,8 +45,7 @@ function AddBlog() {
     }
   
     try {
-        const response = await axios.post(`${API_URL}/blogs/createblog`, dataToSend);
-        console.log('Response:', response);
+         await axios.post(`${API_URL}/blogs/createblog`, dataToSend);
         
         
         Swal.fire({

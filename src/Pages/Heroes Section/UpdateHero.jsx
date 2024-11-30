@@ -68,11 +68,10 @@ export default function UpdateHeroSection() {
     }
 
     try {
-      const response = await axios.put(
+      await axios.put(
         `${API_URL}/heroes/updatehero/${lang}/${id}`,
         dataToSend
       );
-      console.log("Response:", response);
 
       setMessage({ type: "success", text: "Hero updated successfully!" });
 

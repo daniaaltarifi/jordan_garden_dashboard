@@ -45,11 +45,10 @@ export default function AddService() {
     }
 
     try {
-      const response = await axios.post(
+       await axios.post(
         `${API_URL}/services/createservice`,
         dataToSend
       );
-      console.log("Response:", response);
 
       setMessage({ type: "success", text: "Service added successfully!" });
 

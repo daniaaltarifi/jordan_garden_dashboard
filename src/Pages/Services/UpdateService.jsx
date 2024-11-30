@@ -62,11 +62,10 @@ export default function UpdateService() {
     }
 
     try {
-      const response = await axios.put(
+      await axios.put(
         `${API_URL}/services/updateservice/${id}/${lang}`,
         dataToSend
       );
-      console.log("Response:", response);
 
       setMessage({ type: "success", text: "Service updated successfully!" });
 

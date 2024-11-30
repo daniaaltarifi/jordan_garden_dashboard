@@ -36,7 +36,6 @@ function AddAdvantage() {
       ...prevData,
       [name]: value,
     }));
-    console.log("first change", formData.service_id);
   };
 
   const handleSubmit = (e) => {

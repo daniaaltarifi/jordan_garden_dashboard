@@ -28,12 +28,11 @@ function AddContent() {
     
     try {
       // Sending the formData object as the request body
-      const response = await axios.post(
+       await axios.post(
         `${API_URL}/allcontents/createcontent`,
         formData,  // Send the entire formData as the body
       );
       
-      console.log("Response:", response);
   
       Swal.fire({
         icon: "success",

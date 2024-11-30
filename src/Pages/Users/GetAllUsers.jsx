@@ -16,7 +16,6 @@ function GetAllUsers() {
         const response = await axios.get(`${API_URL}/users/allusers/${lang}`);
         const data = response.data;
 
-        console.log("Fetched Users Data:", data);
 
         if (Array.isArray(data)) {
           setUsersData(data);

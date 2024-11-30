@@ -83,11 +83,10 @@ function AddProject() {
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${API_URL}/projects/createproject`,
         dataToSend
       );
-      console.log("Response:", response);
 
 
       Swal.fire({

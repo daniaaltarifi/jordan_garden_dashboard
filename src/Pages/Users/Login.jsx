@@ -32,9 +32,7 @@ function Login() {
       });
       if (response.status === 200) {
         Cookies.set("token", response.data.token, { expires: 1 });
-        console.log(response.data.token);
         navigate(`/${lang}`); 
-        console.log(`The Langugaue is :${lang}`)
       }
     } catch (error) {
       Swal.fire({

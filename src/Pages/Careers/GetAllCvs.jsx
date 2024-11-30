@@ -19,7 +19,7 @@ function GetAllCvs() {
           return;
         }
 
-        const response = await axios.get(`${API_URL}/CreateCareer/allcareer/${lang}`);
+        const response = await axios.get(`${API_URL}/CreateCareer/allcvs/${lang}`);
         const data = response.data;
 
         if (Array.isArray(data)) {

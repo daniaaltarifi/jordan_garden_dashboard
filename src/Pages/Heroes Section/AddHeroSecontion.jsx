@@ -51,8 +51,7 @@ export default function AddHeroSection() {
     }
   
     try {
-        const response = await axios.post(`${API_URL}/heroes/createhero`, dataToSend);
-        console.log('Response:', response);
+         await axios.post(`${API_URL}/heroes/createhero`, dataToSend);
         
         setMessage({ type: 'success', text: 'The Added Hero is Successfully!' });
         

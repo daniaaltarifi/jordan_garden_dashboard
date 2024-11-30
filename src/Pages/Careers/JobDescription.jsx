@@ -53,7 +53,6 @@ function JobDescription() {
         .delete(`${API_URL}/careersdescription/deletecareer/${careerId}/${lang}`)
         .then((response) => {
           if (response.status === 200) {
-            console.log("Job deleted successfully");
             window.location.href = "/careers"; 
           } else {
             console.error("Failed to delete the job");

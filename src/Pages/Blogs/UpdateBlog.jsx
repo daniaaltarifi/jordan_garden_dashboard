@@ -24,7 +24,6 @@ function UpdateBlog() {
           `${API_URL}/blogs/getblogbyid/${id}/${lang}`
         );
         setFormData(response.data);
-        console.log("first project", response.data);
       } catch (error) {
         console.error("Error:", error);
         Swal.fire({
@@ -66,11 +65,10 @@ function UpdateBlog() {
     }
 
     try {
-      const response = await axios.put(
+       await axios.put(
         `${API_URL}/blogs/updateblog/${id}/${lang}`,
         dataToSend
       );
-      console.log("Response:", response);
 
       Swal.fire({
         icon: "success",

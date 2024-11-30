@@ -1,8 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-export const API_URL = "http://localhost:7060";
-// export const API_URL = "https://jordangardensbackend.jordangardens.com";
+// export const API_URL = "http://localhost:7060";
+export const API_URL = "https://jordangardensbackend.jordangardens.com";
 
 import {
   BrowserRouter as Router,
@@ -55,9 +55,6 @@ import UpdateImageProject from "./Pages/Projects/UpdateImageProject";
 import AddBlog from "./Pages/Blogs/AddBlog";
 import UpdateBlog from "./Pages/Blogs/UpdateBlog";
 import UpdateAbout from "./Pages/About/UpdateAbout";
-
-import GetAllCvs from "./Pages/Careers/GetAllCvs";
-
 import AddAdvantage from "./Pages/Services/AddAdvantage";
 import UpdateAdvantage from "./Pages/Services/UpdateAdvantage";
 import UpdateCompany from "./Pages/About/UpdateCompany";
@@ -129,7 +126,6 @@ const AppContent = () => {
         <Route path="/:lang/addcareer" element={<AddCareers />} />
         <Route path="/:lang/createadmin" element={<CreateAdmin />} />
         <Route path="/:lang/getallusers" element={<GetAllUsers />} />
-        <Route path="/:lang/allcvs" element={<GetAllCvs />} />
         <Route path="/:lang/addsocial" element={<AddSocial />} />
         <Route path="/:lang/addcontent" element={<AddContent />} />
         <Route path="/:lang/privacypolicy" element={<PrivacyPolicy />} />

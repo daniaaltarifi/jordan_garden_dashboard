@@ -43,8 +43,7 @@ function AddSocial() {
     }
   
     try {
-        const response = await axios.post(`${API_URL}/contacts/createcontact`, dataToSend);
-        console.log('Response:', response);
+       await axios.post(`${API_URL}/contacts/createcontact`, dataToSend);
         
         
         Swal.fire({

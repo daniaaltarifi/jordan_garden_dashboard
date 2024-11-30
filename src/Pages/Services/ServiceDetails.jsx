@@ -33,7 +33,6 @@ function ServiceDetails() {
       .get(`${API_URL}/services/getservicebyid/${id}/${lang}`)
       .then((response) => {
         setServiceData(response.data);
-        // console.log("first",response.data);
         setLoading(false);
       })
       .catch((error) => {
