@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "../Css/Home.css";
 import { Link } from "react-router-dom";
-import HomeSection from "./HomeSection";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { API_URL } from "../App";
+
 // import Header from "../Component/Header";
 function Home() {
   const [heroesData, setHeroesData] = useState([]);
   const lang = location.pathname.split("/")[1] || "en";
 
   useEffect(() => {
-    fetch(`http://localhost:3000/heroes/allheros/${lang}`)
+    fetch(`${API_URL}/heroes/allheros/${lang}`)
       .then((response) => response.json())
       .then((data) => setHeroesData(data))
       .catch((error) => console.error("Error fetching data:", error));
@@ -29,7 +30,7 @@ function Home() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/heroes/deletehero/${lang}/${heroId}`)
+          .delete(`${API_URL}/heroes/deletehero/${lang}/${heroId}`)
           .then(() => {
             setHeroesData(heroesData.filter((hero) => hero.id !== heroId));
             Swal.fire("Deleted!", "The hero has been deleted.", "success");
@@ -49,7 +50,11 @@ function Home() {
   return (
     <>
       <section className="margin_section">
+
       <Link to="/add-hero-section">
+
+        <Link to={`${lang}/add-hero-section`}>
+
                     <button className="btn btn-success btn-icon">
                       <FontAwesomeIcon icon={faPlus} /> 
                     </button>
@@ -59,7 +64,7 @@ function Home() {
             heroesData.map((hero) => (
               <Carousel.Item key={hero.id} className="cont_slider">
                 <img
-                  src={`http://localhost:3000/uploads/${hero.image}`}
+                  src={`${API_URL}/uploads/${hero.image}`}
                   alt={hero.title}
                   className="slider_img"
                 />
@@ -83,7 +88,11 @@ function Home() {
                       <FontAwesomeIcon icon={faPen} /> 
                     </button>
                   </Link>
+
                 
+
+                 
+
                 </Carousel.Caption>
               </Carousel.Item>
             ))
@@ -93,7 +102,6 @@ function Home() {
         </Carousel>
       </section>
 
-      <HomeSection />
     </>
   );
 }

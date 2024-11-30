@@ -1,7 +1,9 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-export const API_URL = "http://localhost:3000";
+// export const API_URL = "http://localhost:3000";
+export const API_URL = "https://jordangardensbackend.jordangardens.com";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -53,7 +55,13 @@ import UpdateImageProject from "./Pages/Projects/UpdateImageProject";
 import AddBlog from "./Pages/Blogs/AddBlog";
 import UpdateBlog from "./Pages/Blogs/UpdateBlog";
 import UpdateAbout from "./Pages/About/UpdateAbout";
+
 import GetAllCvs from "./Pages/Careers/GetAllCvs";
+
+import AddAdvantage from "./Pages/Services/AddAdvantage";
+import UpdateAdvantage from "./Pages/Services/UpdateAdvantage";
+import UpdateCompany from "./Pages/About/UpdateCompany";
+
 
 const DirectionHandler = () => {
   const location = useLocation();
@@ -103,17 +111,19 @@ const AppContent = () => {
         <Route exact path="/:lang/contact" element={<Contact />} />
         <Route exact path="/:lang/signup" element={<SignUp />} />
         <Route exact path="/signin" element={<Login />} />
-        <Route path="/add-hero-section" element={<AddHeroSection />} />
+        <Route path="/:lang/add-hero-section" element={<AddHeroSection />} />
         <Route path="/:lang/addservice" element={<AddService />} />
         <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
         <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
+        <Route path="/:lang/addadvantage" element={<AddAdvantage />} />
+        <Route path="/:lang/updateadvantage/:id" element={<UpdateAdvantage />} />
         <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
         <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
         <Route path="/:lang/updatelogo/:id" element={<UpdateLogo />} />
         <Route path="/:lang/updatesocial/:id" element={<UpdateSocial />} />
         <Route path="/:lang/updateprivacypolicy/:id" element={<UpdatePrivacyPolicy />} />
         <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
-        <Route path="/update-feature/:id/:lang" element={<UpdateServiceFeature />} />
+        <Route path="/:lang/update-feature/:id" element={<UpdateServiceFeature />} />
         <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
         <Route path="/:lang/updatecontent/:id" element={<UpdateContent />} />
         <Route path="/:lang/addcareer" element={<AddCareers />} />
@@ -133,6 +143,8 @@ const AppContent = () => {
         <Route path="/:lang/termsandconditions" element={<TermsAndConditions />} />
         <Route path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
         <Route path="/:lang/updateabout/:id" element={<UpdateAbout />} />
+        <Route path="/:lang/updatecompany/:id" element={<UpdateCompany />} />
+
       </Routes>
       <Footer />
     </>

@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { API_URL } from "../../App";
 
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,6 +24,7 @@ function Careers() {
       .then((response) => response.json())
       .then((data) => {
         setCareers(data);
+        console.log("first career found0", data);
         setLoading(false);
       })
       .catch((error) => {
@@ -50,9 +50,7 @@ function Careers() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `${API_URL}/careers/deletecareer/${career_id}/${lang}`
-          )
+          .delete(`${API_URL}/careers/deletecareer/${career_id}/${lang}`)
           .then((response) => {
             if (response.status === 200) {
               Swal.fire(
@@ -101,14 +99,14 @@ function Careers() {
           <Row>
             <div>
               <Button
-              className="btn btn-success"
+                className="btn btn-success"
                 variant="primary"
                 onClick={() => navigate(`/${lang}/addjobdescription`)}
               >
                 {lang === "ar" ? "إضافة وصف وظيفة" : "Add Job Description"}
               </Button>
               <Button
-              className="btn btn-success"
+                className="btn btn-success"
                 variant="primary"
                 onClick={() => navigate(`/${lang}/addcareer`)}
               >
@@ -125,12 +123,12 @@ function Careers() {
                           <img src={work} alt="work" height={"35px"} />
                         </div>
                         <p className="position_name_careers">
-                          {career.position_name}
+                          {career.position}
                         </p>
                       </div>
                       <div>
                         <p>
-                          {career.open_count}{" "}
+                          {career.numberOfPositions}{" "}
                           {lang === "ar"
                             ? `وظائف مفتوحة`
                             : `position${
@@ -167,7 +165,7 @@ function Careers() {
                         <br />
                         <div className="d-flex gap-3 mt-3">
                           <Button
-                          className="btn btn-success"
+                            className="btn btn-success"
                             variant="primary"
                             onClick={() =>
                               navigate(`/${lang}/updatecareers/${career.id}`)

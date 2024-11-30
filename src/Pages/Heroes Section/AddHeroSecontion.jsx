@@ -3,8 +3,11 @@ import { Form, Button, Col, Row, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../App';
 
 export default function AddHeroSection() {
+  const lang = location.pathname.split("/")[1] || "en";
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -48,7 +51,7 @@ export default function AddHeroSection() {
     }
   
     try {
-        const response = await axios.post('http://localhost:3000/heroes/createhero', dataToSend);
+        const response = await axios.post(`${API_URL}/heroes/createhero`, dataToSend);
         console.log('Response:', response);
         
         setMessage({ type: 'success', text: 'The Added Hero is Successfully!' });
@@ -58,7 +61,7 @@ export default function AddHeroSection() {
           title: 'The Added Hero is Successfully!',
           text: 'The hero has been successfully added to the system.',
         }).then(() => {
-          navigate('/');
+          navigate(`/${lang}`);
         });
 
         setFormData({ title: '', description: '', image: null, link: '', titleBtn: '', lang: 'en' });
@@ -119,7 +122,7 @@ export default function AddHeroSection() {
             <Form.Group controlId="formLink">
               <Form.Label>Link</Form.Label>
               <Form.Control
-                type="url"
+                type="text"
                 placeholder="Enter link"
                 name="link"
                 value={formData.link}
@@ -171,7 +174,7 @@ export default function AddHeroSection() {
           </div>
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
+        <Button variant="success" type="submit" className="w-100">
           Submit
         </Button>
       </Form>

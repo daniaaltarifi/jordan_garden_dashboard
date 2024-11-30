@@ -17,7 +17,7 @@ function UpdateServiceFeature() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/featureservices/featureservicesbyservice_Id/${id}/${lang}`)
+      .get(`${API_URL}/featureservices/featureservicesbyid/${id}/${lang}`)
       .then((response) => {
         setFeatureData(response.data); 
         setLoading(false);
@@ -49,7 +49,7 @@ function UpdateServiceFeature() {
               confirmButtonText: lang === "ar" ? "موافق" : "OK",
             }).then(() => {
            
-              navigate(`/${lang}/careers`);
+              navigate(`/${lang}/services`);
             });
           }
      

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie"; 
 import Swal from "sweetalert2";  
+import { API_URL } from "../../App";
 
 function Login() {
   const [validated, setValidated] = useState(false);
@@ -25,7 +26,7 @@ function Login() {
     setValidated(true);
 
     try {
-      const response = await axios.post(`http://localhost:3000/users/login/${lang}`, {
+      const response = await axios.post(`${API_URL}/users/login/${lang}`, {
         email,
         password
       });

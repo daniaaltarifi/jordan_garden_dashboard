@@ -3,6 +3,7 @@ import { Container, Row, Table, Button } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom"; 
 import Swal from "sweetalert2"; 
+import { API_URL } from "../App";
 
 function Contact() {
   const { lang } = useParams(); 
@@ -12,7 +13,7 @@ function Contact() {
   useEffect(() => {
     const fetchContactData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/ContactUs/getallcontactus/${lang}`);
+        const response = await axios.get(`${API_URL}/ContactUs/getallcontactus/${lang}`);
         const data = response.data;
         console.log("Fetched Data:", data);
        
@@ -47,7 +48,7 @@ function Contact() {
       if (result.isConfirmed) {
         try {
    
-          const response = await axios.delete(`http://localhost:3000/ContactUs/deletecontactus/${id}/${lang}`);
+          const response = await axios.delete(`${API_URL}/ContactUs/deletecontactus/${id}/${lang}`);
           if (response.status === 200) {
             setContactData(contactData.filter(contact => contact.id !== id));
             Swal.fire("Deleted!", "The contact information has been deleted.", "success");
