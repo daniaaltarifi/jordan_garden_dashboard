@@ -6,7 +6,7 @@ import work from "../../assets/work.png";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { API_URL } from "../../App";
-
+import GetAllCvs from "./GetAllCvs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -206,6 +206,7 @@ function Careers() {
             )}
           </Row>
         </Container>
+        <GetAllCvs/>
       </section>
     </>
   );

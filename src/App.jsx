@@ -1,8 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Component/Header";
-// export const API_URL = "http://localhost:3000";
-export const API_URL = "https://jordangardensbackend.jordangardens.com";
+export const API_URL = "http://localhost:7060";
+// export const API_URL = "https://jordangardensbackend.jordangardens.com";
 
 import {
   BrowserRouter as Router,
