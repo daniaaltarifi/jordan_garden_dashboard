@@ -107,7 +107,7 @@ export default function AddService() {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={5}
+                rows={8}
                 placeholder="Enter description"
                 name="description"
                 value={formData.description}
