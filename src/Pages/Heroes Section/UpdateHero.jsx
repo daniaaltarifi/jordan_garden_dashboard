@@ -147,7 +147,7 @@ export default function UpdateHeroSection() {
             <Form.Group controlId="formLink">
               <Form.Label>Link</Form.Label>
               <Form.Control
-                type="url"
+                type="text"
                 placeholder="Enter link"
                 name="link"
                 value={formData.link}
@@ -190,17 +190,17 @@ export default function UpdateHeroSection() {
           <Form.Label>Upload Image</Form.Label>
           <Form.Control type="file" onChange={handleImageChange} />
           <div className="mt-2">
-            {formData.image && (
+            {/* {formData.image && (
               <>
                 <p>{formData.image.name}</p>
               
                 <img
                   src={`${API_URL}/uploads/${formData.image.name}`}
                   alt="Hero"
-                  style={{ width: "100%", height: "auto", marginTop: "10px" }}
+                  style={{ width: "120px", height: "120px", marginTop: "10px" }}
                 />
               </>
-            )}
+            )} */}
             {formData.image && !formData.image.name && formData.image && (
               <img
                 src={`${API_URL}/uploads/${formData.image}`}

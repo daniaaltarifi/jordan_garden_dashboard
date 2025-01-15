@@ -1,4 +1,4 @@
-import { Col, Container, Row,Button } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ function Blogs() {
     setIdToDelete(id); // Set the Blogs ID to delete
     setShowModal(true);
   };
-  
+
   const handleClose = () => {
     setShowModal(false);
     setIdToDelete(null); // Reset the ID when closing
@@ -65,44 +65,43 @@ function Blogs() {
                   <div className="card mb-3 blog_card">
                     <div className="row g-0">
                       {/* {images.map((image, index) => ( */}
-                        <div className="col-md-4" >
-                          <img
-                            src={`${API_URL}/uploads/${blog.image}`}
-                            className="rounded"
-                            height={"100%"}
-                            width={"100%"}
-                            alt={`blog-image`}
-                          />
-                        </div>
+                      <div className="col-md-4">
+                        <img
+                          src={`${API_URL}/uploads/${blog.image}`}
+                          className="rounded"
+                          height="245px"
+                          width="100%"
+                          alt={blog.title}
+                        />
+                      </div>
                       {/* ))} */}
                       <div className="col-md-8">
                         <div className="card-body">
                           <h4 className="card-title title_blog">
                             {blog.title}
-                           
                           </h4>
                           <p className="card-text desc_blogs">
                             {blog.description}
                           </p>
                         </div>
                       </div>
-                  <div className="d-flex mb-2">
-                      <Link to={`/${lang}/updateblog/${blog.id}`}>
-                        <Button variant="success" className="mt-2 mx-2">
-                          {lang === "ar" ? "تعديل" : "Update"}
-                          <MdEdit />
-                        </Button>
-                      </Link>
+                      <div className="d-flex mb-2">
+                        <Link to={`/${lang}/updateblog/${blog.id}`}>
+                          <Button variant="success" className="mt-2 mx-2">
+                            {lang === "ar" ? "تعديل" : "Update"}
+                            <MdEdit />
+                          </Button>
+                        </Link>
 
-                      <Button
-                        variant="danger"
-                        className=" mt-2"
-                        onClick={() => handleShow(blog.id)}
-                      >
-                        {lang === "ar" ? "حذف" : "Delete"}
-                        <MdDelete />
-                      </Button>
-                    </div>
+                        <Button
+                          variant="danger"
+                          className=" mt-2"
+                          onClick={() => handleShow(blog.id)}
+                        >
+                          {lang === "ar" ? "حذف" : "Delete"}
+                          <MdDelete />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Col>
@@ -112,11 +111,11 @@ function Blogs() {
         </Container>
       </section>
       <DeleteModule
-          show={showModal}
-          handleClose={handleClose}
-          handleDelete={handleDelete}
-          id={IdToDelete} // Pass the Blogs ID to DeleteModule
-        />
+        show={showModal}
+        handleClose={handleClose}
+        handleDelete={handleDelete}
+        id={IdToDelete} // Pass the Blogs ID to DeleteModule
+      />
     </>
   );
 }

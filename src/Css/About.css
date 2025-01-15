@@ -69,6 +69,7 @@ line-height: 24px;
   text-overflow: ellipsis;
 }
 .blog_card{
+  height: 250px;
   border: 3px solid var(--light-brown-color);
   box-shadow: var(--main-color) 6.95px 1.95px 2.6px;
 }

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../App";
 import Cookies from "js-cookie";
-const Header = () => {
+const Header = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const lang = location.pathname.split("/")[1] || "en";
   const [isOpen, setIsOpen] = useState(false);
@@ -45,12 +45,9 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      // const userId = 1; 
-      // await axios.post(`${API_URL}/users/logout/${userId}`, {}, { withCredentials: true });
-      // console.log("Logged out successfully");
-    
-    Cookies.remove("token")
-      navigate(`/${lang}/login`);
+      Cookies.remove("token")
+      setIsAuthenticated(false); // Update the parent component's state
+      navigate(`/`);
     } catch (error) {
       console.error("Error during logout: ", error);
     }

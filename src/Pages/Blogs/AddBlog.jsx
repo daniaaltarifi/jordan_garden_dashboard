@@ -93,7 +93,7 @@ function AddBlog() {
               <Form.Label>{lang ==='ar' ?"الوصف":"description"}</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={2}
+                rows={5}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}

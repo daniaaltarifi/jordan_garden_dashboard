@@ -21,10 +21,10 @@ export default function UpdateService() {
       .get(`${API_URL}/services/getservicebyid/${id}/${lang}`)
       .then((response) => {
         setFormData({
-          title: response.data.title,
-          description: response.data.description,
-          image: response.data.image, 
-          lang: response.data.lang,
+          title: response.data[0].title,
+          description: response.data[0].description,
+          image: response.data[0].image, 
+          lang: response.data[0].lang,
         });
       })
       .catch((error) => {
@@ -74,7 +74,7 @@ export default function UpdateService() {
         title: "Service Updated!",
         text: "The service has been successfully updated.",
       }).then(() => {
-        navigate(`/services/${lang}`); 
+        navigate(`/${lang}/services`); 
       });
 
       setFormData({
@@ -155,16 +155,16 @@ export default function UpdateService() {
           <Form.Label>Upload Image</Form.Label>
           <Form.Control type="file" onChange={handleImageChange} />
           <div className="mt-2">
-            {formData.image && (
+            {/* {formData.image && (
               <>
                 <p>{formData.image.name}</p>
                 <img
                   src={`${API_URL}/uploads/${formData.image.name}`}
                   alt="Service"
-                  style={{ width: "100%", height: "auto", marginTop: "10px" }}
+                  style={{ width: "590px", height: "190px", marginTop: "10px" }}
                 />
               </>
-            )}
+            )} */}
             {formData.image && !formData.image.name && formData.image && (
               <img
                 src={`${API_URL}/uploads/${formData.image}`}

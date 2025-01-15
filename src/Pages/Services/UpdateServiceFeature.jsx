@@ -39,7 +39,7 @@ function UpdateServiceFeature() {
     }
 
     axios
-      .put(`${API_URL}/featureservices/updatefeatureservicesnyserviceid/${id}/${lang}`, formData)
+      .put(`${API_URL}/featureservices/updatefeatureservices/${id}/${lang}`, formData)
       .then((response) => {
         if (response.status === 200) {
      

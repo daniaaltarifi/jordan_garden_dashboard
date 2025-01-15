@@ -8,17 +8,16 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   useLocation,
 } from "react-router-dom";
 import TopHeader from "./Component/TopHeader";
 import Home from "./Pages/Home";
 import Footer from "./Component/Footer";
-import About from './Pages/About/About';
+import About from "./Pages/About/About";
 import Projects from "./Pages/Projects/Projects";
 import Blogs from "./Pages/Blogs/Blogs";
 import Careers from "./Pages/Careers/Careers";
-import Services from './Pages/Services/Services';
+import Services from "./Pages/Services/Services";
 import ServiceDetails from "./Pages/Services/ServiceDetails";
 import JobDescription from "./Pages/Careers/JobDescription";
 import Contact from "./Pages/Contact";
@@ -32,7 +31,7 @@ import UpdateJobDescription from "./Pages/Careers/UpdateJobDescription";
 import AddDescriptionJob from "./Pages/Careers/AddDescriptionJob";
 import UpdateCareers from "./Pages/Careers/UpdateCareers";
 import AddCareers from "./Pages/Careers/AddCareers";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import UpdateServiceFeature from "./Pages/Services/UpdateServiceFeature";
 import AddFeatureServices from "./Pages/Services/AddFeatureServices";
@@ -59,7 +58,6 @@ import AddAdvantage from "./Pages/Services/AddAdvantage";
 import UpdateAdvantage from "./Pages/Services/UpdateAdvantage";
 import UpdateCompany from "./Pages/About/UpdateCompany";
 
-
 const DirectionHandler = () => {
   const location = useLocation();
   const lang = location.pathname.split("/")[1] || "en";
@@ -72,55 +70,79 @@ const DirectionHandler = () => {
   return null;
 };
 
-
-
-
-
-
 const AppContent = () => {
   // const location = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get('token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => !!Cookies.get("token")
+  );
 
   useEffect(() => {
-    const token = Cookies.get('token');
+    const token = Cookies.get("token");
     if (token) {
       setIsAuthenticated(!!token);
     }
   }, []);
 
-
   return (
     <>
       <TopHeader />
-      <Header />
+      {isAuthenticated && <Header setIsAuthenticated={setIsAuthenticated} />}
       <DirectionHandler />
       <Routes>
-        <Route path="/*" element={isAuthenticated ? <Home /> : <Navigate to="/" replace />} />
+        <Route path="/*" element={<Home />} />
         <Route exact path="/:lang/about" element={<About />} />
         <Route exact path="/" element={<Login />} />
         <Route exact path="/:lang/signin" element={<Login />} />
         <Route exact path="/:lang/services" element={<Services />} />
-        <Route exact path="/:lang/servicedetails/:id" element={<ServiceDetails />} />
+        <Route
+          exact
+          path="/:lang/servicedetails/:id"
+          element={<ServiceDetails />}
+        />
         <Route exact path="/:lang/projects" element={<Projects />} />
         <Route exact path="/:lang/blogs" element={<Blogs />} />
         <Route exact path="/:lang/careers" element={<Careers />} />
-        <Route path="/:lang/jobdescription/:careerId" element={<JobDescription />} />
+        <Route
+          path="/:lang/jobdescription/:careerId"
+          element={<JobDescription />}
+        />
         <Route exact path="/:lang/contact" element={<Contact />} />
         <Route exact path="/:lang/signup" element={<SignUp />} />
         <Route exact path="/signin" element={<Login />} />
         <Route path="/:lang/add-hero-section" element={<AddHeroSection />} />
         <Route path="/:lang/addservice" element={<AddService />} />
-        <Route path="/:lang/addjobdescription" element={<AddDescriptionJob />} />
-        <Route path="/:lang/AddFeatureServices" element={<AddFeatureServices />} />
+        <Route
+          path="/:lang/addjobdescription"
+          element={<AddDescriptionJob />}
+        />
+        <Route
+          path="/:lang/AddFeatureServices"
+          element={<AddFeatureServices />}
+        />
         <Route path="/:lang/addadvantage" element={<AddAdvantage />} />
-        <Route path="/:lang/updateadvantage/:id" element={<UpdateAdvantage />} />
-        <Route path="/:lang/update-hero-section/:id" element={<UpdateHeroSecontion />} />
+        <Route
+          path="/:lang/updateadvantage/:id"
+          element={<UpdateAdvantage />}
+        />
+        <Route
+          path="/:lang/update-hero-section/:id"
+          element={<UpdateHeroSecontion />}
+        />
         <Route path="/:lang/updateservice/:id" element={<UpdateService />} />
         <Route path="/:lang/updatelogo/:id" element={<UpdateLogo />} />
         <Route path="/:lang/updatesocial/:id" element={<UpdateSocial />} />
-        <Route path="/:lang/updateprivacypolicy/:id" element={<UpdatePrivacyPolicy />} />
-        <Route path="/:lang/updatejobdescription/:careerId" element={<UpdateJobDescription />} />
-        <Route path="/:lang/update-feature/:id" element={<UpdateServiceFeature />} />
+        <Route
+          path="/:lang/updateprivacypolicy/:id"
+          element={<UpdatePrivacyPolicy />}
+        />
+        <Route
+          path="/:lang/updatejobdescription/:careerId"
+          element={<UpdateJobDescription />}
+        />
+        <Route
+          path="/:lang/update-feature/:id"
+          element={<UpdateServiceFeature />}
+        />
         <Route path="/:lang/updatecareers/:id" element={<UpdateCareers />} />
         <Route path="/:lang/updatecontent/:id" element={<UpdateContent />} />
         <Route path="/:lang/addcareer" element={<AddCareers />} />
@@ -131,16 +153,27 @@ const AppContent = () => {
         <Route path="/:lang/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/:lang/addprivacypolicy" element={<AddPrivacyPolicy />} />
         <Route path="/:lang/addproject" element={<AddProject />} />
-        <Route path="/:lang/addtermsandcondition" element={<AddTermsAndConditions />} />
+        <Route
+          path="/:lang/addtermsandcondition"
+          element={<AddTermsAndConditions />}
+        />
         <Route path="/:lang/addblog" element={<AddBlog />} />
         <Route path="/:lang/updateproject/:id" element={<UpdateProject />} />
         <Route path="/:lang/updateblog/:id" element={<UpdateBlog />} />
-        <Route path="/:lang/updateimageproject/:id" element={<UpdateImageProject />} />
-        <Route path="/:lang/termsandconditions" element={<TermsAndConditions />} />
-        <Route path="/:lang/updatetermsandcondition/:id" element={<UpdateTermsAndCondition />} />
+        <Route
+          path="/:lang/updateimageproject/:id"
+          element={<UpdateImageProject />}
+        />
+        <Route
+          path="/:lang/termsandconditions"
+          element={<TermsAndConditions />}
+        />
+        <Route
+          path="/:lang/updatetermsandcondition/:id"
+          element={<UpdateTermsAndCondition />}
+        />
         <Route path="/:lang/updateabout/:id" element={<UpdateAbout />} />
         <Route path="/:lang/updatecompany/:id" element={<UpdateCompany />} />
-
       </Routes>
       <Footer />
     </>
